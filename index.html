@@ -1,0 +1,80 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<title>plan2020</title>
+
+
+
+
+<script src='src/lib/jquery-1.11.3.js'></script>
+<!--
+
+<script src='src/libMy/MenuScene.js'></script>
+<script src='src/libMy/SceneSB.js'></script>
+	дабаг-->	
+<script src='src/lib/tween.min.js'></script>
+<script src='src/lib/pixi.js'></script>
+<script src='src/lib/three.min.js'></script>
+
+<script src='src/libMy/divLib.js'></script><!--дабаг-->
+
+
+
+
+
+
+
+<style type="text/css">
+	#stats { position: absolute; top:0; left: 200px; }
+</style>
+
+</head>
+<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<body>
+
+<script  type="module">
+
+	import { P20 } from './src/p20/P20.js';
+	import { Menu} from './src/p20/Menu.js';
+	window.trace = window.console.log.bind(window.console);
+
+	
+
+	var p20=new P20('resources/font/helvetiker_bold.typeface.json',function(s,p,p1){
+		trace(s,p,p1)		
+		if(s=="complit"){
+			
+			return;
+		}
+	});
+	document.body.appendChild(p20.div); //приатачиваем див там 3д и соты
+
+	var menu=new Menu(function(s,p,p1){		
+		trace(s,p,p1);
+		p20.setArrObj(p);
+	});
+
+	
+
+
+
+
+
+	function sizeWindow () {
+		var w = document.documentElement.clientWidth;
+		var h = document.documentElement.clientHeight;
+		menu.sizeWindow(w,h);
+		p20.sizeWindow(w,h);
+	}
+	window.onresize = sizeWindow;
+	sizeWindow();
+
+
+	let s='[{"id":0,"point0":{"x":0,"y":0},"point1":{"x":750,"y":-1350},"width":500},{"id":1,"point0":{"x":750,"y":-1350},"point1":{"x":2250,"y":-1350},"width":500},{"id":2,"point0":{"x":2250,"y":-1350},"point1":{"x":3000,"y":0},"width":500},{"id":3,"point0":{"x":0,"y":0},"point1":{"x":-1575,"y":0},"width":500},{"id":4,"point0":{"x":-1575,"y":0},"point1":{"x":-1575,"y":4000},"width":500},{"id":6,"point0":{"x":4625,"y":4000},"point1":{"x":4625,"y":0},"width":500},{"id":7,"point0":{"x":4625,"y":0},"point1":{"x":3000,"y":0},"width":500},{"id":8,"point0":{"x":-1575,"y":1850},"point1":{"x":4625,"y":1850},"width":400},{"id":9,"point0":{"x":-1575,"y":4000},"point1":{"x":750,"y":4000},"width":500},{"id":10,"point0":{"x":750,"y":5296},"point1":{"x":2250,"y":5296},"width":500},{"id":11,"point0":{"x":2250,"y":5296},"point1":{"x":2250,"y":4000},"width":500},{"id":12,"point0":{"x":2250,"y":4000},"point1":{"x":4625,"y":4000},"width":500},{"id":13,"point0":{"x":750,"y":4000},"point1":{"x":750,"y":5296},"width":500},{"id":14,"point0":{"x":750,"y":4000},"point1":{"x":750,"y":6132},"width":400,"alignmentThisSide":"right","alignmentId":13,"alignmentOtherSide":"right"},{"id":15,"point0":{"x":750,"y":6132},"point1":{"x":-1061,"y":6132},"width":400},{"id":16,"point0":{"x":-1061,"y":6132},"point1":{"x":-1061,"y":4000},"width":400},{"id":17,"point0":{"x":-1061,"y":4000},"point1":{"x":750,"y":4000},"width":400},{"id":18,"point0":{"x":2250,"y":4000},"point1":{"x":2250,"y":1850},"width":400,"alignmentThisSide":"right","alignmentId":11,"alignmentOtherSide":"left"}]';
+
+	//s='[{"id":0,"point0":{"x":0,"y":0},"point1":{"x":750,"y":-1350},"width":500}]'
+    menu.setArrObj(JSON.parse(s));
+    p20.setArrObj(JSON.parse(s));
+
+	
+</script>	
+</body></html>

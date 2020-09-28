@@ -1,0 +1,86 @@
+{
+	"hScane": {
+		"startVisi": "{|xVerh|:976.07,|yVerh|:-135.18,|zVerh|:370.12,|rotationX|:0.96,|rotationZ|:-0.27,|zume|:1678.29}",
+		"time": 323,
+		"array": [
+			{
+				"x": 700,
+				"y": 0,
+				"z": 0,
+				"rotation": 0,
+				"radius": 300,
+				"color": "#313A4E",
+				"height": 50,
+				"startVisi": "{|xVerh|:641.65,|yVerh|:-82.74,|zVerh|:126.37,|rotationX|:0.59,|rotationZ|:0.4,|zume|:1181.27}",
+				"array": [
+					{
+						"height": 22,
+						"visible": true,
+						"text": "Oracles",
+						"colorText": "#272F44",
+						"fontSize": 16,
+						"boolAM": true,
+						"rA": 0.68
+					},
+					{
+						"height": 22,
+						"visible": true,
+						"text": "Decentralized",
+						"colorText": "#ffffff",
+						"fontSize": 16,
+						"boolAM": true,
+						"rA": 0.24
+					},
+					{
+						"height": 10,
+						"visible": true,
+						"text": "DAO",
+						"colorText": "#ffffff",
+						"fontSize": 16,
+						"boolAM": true,
+						"rA": 0.17
+					},
+					{
+						"height": 4,
+						"visible": false,
+						"text": "",
+						"colorText": "#ffffff",
+						"fontSize": 16,
+						"boolAM": true,
+						"rA": 0.08
+					},
+					{
+						"height": 31,
+						"visible": true,
+						"text": "Blockchain",
+						"colorText": "#ffffff",
+						"fontSize": 16,
+						"boolAM": true,
+						"rA": 0.24
+					},
+					{
+						"height": 22,
+						"visible": true,
+						"text": "X-Chain",
+						"colorText": "#ffffff",
+						"fontSize": 16,
+						"boolAM": true,
+						"rA": 0.1
+					},
+					{
+						"height": 14,
+						"visible": true,
+						"text": "Oracles",
+						"colorText": "#ffffff",
+						"fontSize": 16,
+						"boolAM": true,
+						"rA": 0.12
+					}
+				],
+				"text": "GRAVITY PROTOCOL",
+				"colorText": "#ffffff",
+				"fontSize": 16
+			}
+		]
+	}
+}
