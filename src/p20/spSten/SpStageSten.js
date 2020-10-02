@@ -1,7 +1,7 @@
 
 //import { TriangulateShape } from './TriangulateShape.js';
 import { SpliceSten } from './SpliceSten.js';
-//import { SpPointSten } from './SpPointSten.js';
+import { SpPointSten } from './SpPointSten.js';
 //import { Pol3D } from './Pol3D.js';
 import { SpStage } from './../sp/SpStage.js';
 import {  Calc } from './../Calc.js';
@@ -37,6 +37,8 @@ export function SpStageSten (par, pm) {
 
 	this.boolText = true;
 	this.content2d = new PIXI.Container();
+
+	this.content2dPoint = new PIXI.Container();
 
 	/*this.graphics = new PIXI.Graphics();
     this.content2d.addChild(this.graphics);
@@ -83,7 +85,7 @@ export function SpStageSten (par, pm) {
 	this.materialActivePol  = new THREE.MeshPhongMaterial({color:0x005a88,transparent:true,opacity:0.1})
 	this.materialActivePol.side = THREE.DoubleSide;*/
 	
-	//this.getPoint=function(){ return new SpPointSten(this);}
+	this.getPoint=function(){ return new SpPointSten(this);}
 	this.getSplice=function(){ 
 	
 		return new SpliceSten(this);
@@ -97,8 +99,7 @@ export function SpStageSten (par, pm) {
 	
 	this.render=function(){
 		//self.pm.visi3D.intRend=1
-		if(this.par.renderDebag)this.par.renderDebag()
-		
+		if(this.par.renderDebag)this.par.renderDebag()		
 	}
 
 	
@@ -117,12 +118,15 @@ export function SpStageSten (par, pm) {
 		this.arrObj.push(o);
 	}
 
-	this.doRender=function(){		
-		if(self.arrObj.length==0)return;		
+	this.doRender=function(){
+
+		if(self.arrObj.length==0)return false;		
 		for (let i = 0; i < self.arrObj.length; i++) {
 			self.arrObj[i].dragPost();
+			
 		}
 		self.arrObj.length=0;
+		return true;	
 	}
 
 	
@@ -297,5 +301,7 @@ Object.defineProperties(SpStageSten.prototype, {
 		},
 		get: function () { return this._activePol; }
 	},
+
+	
 
 });

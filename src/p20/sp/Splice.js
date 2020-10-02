@@ -19,8 +19,8 @@ export function Splice (_stage) {
 	this.idArr = -1;
 	this._life = true;
 	this._delph = 20;// толщина линии
-	this.delphMin = 5;
-	this.delphMax = 100;
+	this.delphMin = 1;
+	this.delphMax = 10000000;
 	this._tip = 0;// 0-линия 1-кривая 2-безье
 	this.arrOpor = [];// для 1 и 2
 

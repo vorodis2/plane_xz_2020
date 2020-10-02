@@ -270,7 +270,8 @@ export class DebbugPixi  {
             
         }
 
-        t.add(this.tick, this);
+        //t.add(this.tick, this);
+
         t.start();
 
         this.sizeWindow = function(w,h){            

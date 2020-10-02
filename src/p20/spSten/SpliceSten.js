@@ -24,13 +24,26 @@ export function SpliceSten (_stage) {
 	this.content2d = new PIXI.Container();
 	_stage.content2d.addChild(this.content2d);
 
-
+	
 	this.graphics = new PIXI.Graphics();
     this.content2d.addChild(this.graphics);
+    this.graphics.interactive = true;
     
 
     this.graphics.beginFill(Math.random()*0xffffff, 0.5);
-    this.graphics.drawCircle(0,0,150);/**/
+    this.graphics.drawCircle(0,0,150);
+
+
+    this.onDragStart=function(e){
+    	if(_stage.par.sobSP!=undefined)_stage.par.sobSP("downSten",self,e)
+    }
+
+    this.graphics.interactive = true;            
+    this.graphics.on('mousedown', this.onDragStart);
+
+
+
+    /**/
 
     
 
@@ -81,13 +94,11 @@ export function SpliceSten (_stage) {
 		return this.sten2D.contains(_point);
 	};
 */
-	this.dragPost=function(){
-		this.content2d.x=this.position.x;
-		this.content2d.y=this.position.y;
-		this.content2d.rotation=this._rotation;
-		trace(this.idArr,this.position.x,this.position.y,this._rotation)
-		trace(this.arrPosit)
-		trace(this.arrPosit1)
+	
+
+
+	this.draw1 = function () {
+	
 		this.graphics.clear();
 		this.graphics.lineStyle(10, 0x555555, 0.8);
 		this.graphics.moveTo(0,0);
@@ -95,7 +106,7 @@ export function SpliceSten (_stage) {
 
 
 		this.graphics.lineStyle(0.1, Math.random()*0xffffff, 0.18);
-		this.graphics.beginFill(Math.random()*0xffffff, 0.5);
+		this.graphics.beginFill(0x47aec8, 0.5);
 
 
 
@@ -119,7 +130,16 @@ export function SpliceSten (_stage) {
 		this.graphics.lineTo(-this.arrPosit[4].x,this.arrPosit[4].y);
 		this.graphics.lineTo(-this.arrPosit[3].x,this.arrPosit[3].y);
 
+	}
 
+
+
+	this.dragPost=function(){		
+		this.content2d.x=this.position.x;
+		this.content2d.y=this.position.y;
+		this.content2d.rotation=this._rotation;
+
+		this.draw1();
 
 
 		this.stage.render();
@@ -167,8 +187,8 @@ SpliceSten.prototype.restart = function () {
 
 SpliceSten.prototype.drag = function () {
 	Splice.prototype.drag.call(this);
-	this.stage.addObjFun(this)
-	
+	this.stage.addObjFun(this);
+	//trace(">>>>",this);
 };
 Object.defineProperties(SpliceSten.prototype, {
 
@@ -220,6 +240,8 @@ Object.defineProperties(SpliceSten.prototype, {
 			for (var ii = 0; ii < this.arrayClass.length; ii++) {
 				if ('activMouse' in this.arrayClass[ii]) this.arrayClass[ii].life = this._life;
 			}
+			if(this._life==true)this.stage.content2d.addChild(this.content2d);
+			else if(this.content2d.parent!=undefined)this.content2d.parent.removeChild(this.content2d);
 		},
 		get: function () { return this._life; }
 	},
