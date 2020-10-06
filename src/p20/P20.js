@@ -49,6 +49,8 @@ export class P20  {
         this.content2d.addChild(this.sp.content2d);
         this.content2d.addChild(this.sp.content2dPoint);
 
+        this.content2d.addChild(this.sp.cont2dDebug);
+
         this.setArrObj=function(a){
             this.sp.clear();
             
@@ -72,7 +74,9 @@ export class P20  {
                 oo.position1=a[i].point1;
 
                 oo.delph=a[i].width;
+                oo.idUi=a[i].id;
                 o.arrSplice.push(oo);
+
                 
 
                 if(max.x>a[i].point0.x)max.x=a[i].point0.x
@@ -113,7 +117,7 @@ export class P20  {
 
 
         this.creatRect=function(){
-            trace(this.sp)
+            
            
             var max={x:99999,y:99999,x1:-999999,y1:-99999}
             for (var i = 0; i < this.sp.arrPoint.length; i++) { 
@@ -142,7 +146,7 @@ export class P20  {
             this.rectXX1.xs=(document.documentElement.clientWidth-this.rectXX1.s*(max.x1- max.x))/2-max.x*this.rectXX1.s;
             this.rectXX1.ys=(document.documentElement.clientHeight-this.rectXX1.s*(max.y1- max.y))/2-max.y*this.rectXX1.s; 
 
-trace(this.rectXX1 )
+
 
         }
 
@@ -165,7 +169,6 @@ trace(this.rectXX1 )
             //this.sp.doRender()
             /*for (var i = 0; i < this.sp.arrSplice.length; i++) {
                 this.sp.arrSplice[i].dragPost();
-
             } */          
           
         }
@@ -177,7 +180,7 @@ trace(this.rectXX1 )
         function animate() {
             requestAnimationFrame( animate );
             if(self.sp.doRender()==true){
-                trace("@@@",self.sp);
+               
                 for (var i = 0; i < self.sp.arrSplice.length; i++) {
                     self.sp.arrSplice[i].dragPost();
 

@@ -42,6 +42,12 @@ export function SpCalc () {
 		};
 	}());
 
+	var debug = undefined;// включение дебагера / и должен быть включен в cAid
+	this.setDebug=function(dp){
+		debug=dp;
+		this.korektPoint.setDebug(dp)
+	}
+
 
 	this.getAngle = function (a, b) {
 		b = b || rezNull;
@@ -84,6 +90,7 @@ export function SpCalc () {
 	this.creatGrani2 = function (sHron, lP, lP2) {
 		sten = sHron.sten;
 		storona = sHron.storona;
+
 		if (storona == false) {
 
 			arrP[0].x = lP.p.x;
@@ -143,6 +150,8 @@ export function SpCalc () {
 			arrP[5].x = lP2.p.x;
 			arrP[5].y = lP2.p.y;
 
+
+
 			position = sHron.sten.position;
 			angel = -sten._rotation;
 			sHron.sten.bolPosit = true;
@@ -174,9 +183,7 @@ export function SpCalc () {
 	var b1;
 	var r =0// aidPointStatic.angelOtstup;
 
-	this.debagOk = function (a) {
-		return debug;
-	};
+
 
 	var sHron;
 	var sHron1;
@@ -192,11 +199,12 @@ export function SpCalc () {
 	// ишем углы почти прямых стен
 
 	this.korektSHObject = function (_aP, num1) {
+		if(debug)debug.clearD();
 
 		aP = _aP;
 		kol = aP.arrSHron.length;
 		sHron1 = aP.arrSHron[num1];// основная
-
+		
 
 		if (kol == 1) {
 			if (sHron1.sten.tip == 0) {
@@ -272,7 +280,16 @@ export function SpCalc () {
 			lP2 = this.getLineStan2(sHron1, sHron2, nB);
 			this.creatGrani2(sHron1, lP, lP2);
 
+			trace(sHron1)
 
+
+			if(debug){
+				debug.dLine(lP.p,lP.p1,0xff0000,22)
+				debug.dLine(lP.p1,lP.p2,0xff5500,22)
+
+				debug.dLine(lP2.p,lP2.p1,0x0000ff,22)
+				debug.dLine(lP2.p1,lP2.p2,0x5500ff,22)
+			}
 
 			if (num1 == 0) {
 				// return;
@@ -355,6 +372,11 @@ export function SpCalc () {
 			}
 			calc.korektToLine(arrP[0], arrP[1], 0, -bXZva.delph / 2 * b1);
 			bXZva.restertTip(0, arrP[0], arrP[1], arrP[2 + 1]);
+
+			if(debug){
+				debug.dLine(arrP[0],arrP[1],0x0000ff,7)
+			}	
+			trace("arrP[0 + 6]")
 		} else if (sHron.sten.tip == 1) {
 			if (bool == true) {
 				if (sHron.storona == true) {
@@ -404,6 +426,12 @@ export function SpCalc () {
 				arrP[1 + 6].y = arrP[1 + 8].y = arrP[1 + 10].y = sHron1.sten.position.y;
 			}
 			calc.korektToLine(arrP[0 + 6], arrP[1 + 6], 0, bXZva1.delph / 2 * b1);
+			trace(arrP[0 + 6])
+
+			if(debug){
+				debug.dLine(arrP[0 + 6],arrP[1 + 6],0x00ff00,22)
+			}
+
 			bXZva1.restertTip(0, arrP[0 + 6], arrP[1 + 6], arrP[1 + 2 + 6]);
 		} else if (sHron1.sten.tip == 1) {
 
@@ -442,6 +470,7 @@ export function SpCalc () {
 
 		lPRet = this.korektPoint.getPeresek(bXZva, bXZva1);
 
+		
 
 
 		return lPRet;

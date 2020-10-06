@@ -13,8 +13,11 @@ export function CalcAidKorektPoint (cAid) {
 	var point, point2, arr;
 	var angel, an2, otDin, di, di1;
 
-	var debug = false;// включение дебагера / и должен быть включен в cAid
+	var debug = undefined;// включение дебагера / и должен быть включен в cAid
 
+	this.setDebug=function(dp){
+		debug=dp
+	}
 	/**
 	* Получить пересечения двух линий
 	* @param {BlaXZNaDva} bla - данные линий 1
@@ -22,6 +25,7 @@ export function CalcAidKorektPoint (cAid) {
 	* @return {LinePosition} точка
 	*/
 	this.getPeresek = function (bla, blaX) {
+
 
 		if ((bla.tip == 0) && (blaX.tip == 0)) { /// ровная ровная
 			return setPointLineLine(bla, blaX);
@@ -57,6 +61,13 @@ export function CalcAidKorektPoint (cAid) {
 			blaX.dragOtstup(otDin);
 
 			angel = calc.getTreeAngel(bla.p, bla.p1, blaX.p);
+
+			if (debug) {
+				
+				debug.dPoint(lineP.p1, 15, 0xff00ff);
+				debug.dPoint(lineP.p, 7, 0x0000ff);
+				debug.dLine(lineP.p, blaX.maxp1, 0x0000ff, 3);
+			}
 
 			// if(Math.abs(Math.round(angel*1000))
 			if (Math.abs(Math.round(angel * 100)) == 314) { // паралели
@@ -158,12 +169,13 @@ export function CalcAidKorektPoint (cAid) {
 					arr.reverse();
 				}
 			}
+
 			if (debug) {
-				cAid.dPoint(blaX.maxp1, 6, 0x0000ff);
-				cAid.dPoint(lineP.p1, 15, 0xff00ff);
-				cAid.dPoint(lineP.p, 7, 0x0000ff);
-				cAid.dLine(lineP.p, blaX.maxp1, 0x0000ff, 3);
-				cAid.dPoint(bla.lineRange.pOCent, bla.lineRange.radius, 0x0000ff, 8);
+				debug.dPoint(blaX.maxp1, 6, 0x0000ff);
+				debug.dPoint(lineP.p1, 15, 0xff00ff);
+				debug.dPoint(lineP.p, 7, 0x0000ff);
+				debug.dLine(lineP.p, blaX.maxp1, 0x0000ff, 3);
+				debug.dPoint(bla.lineRange.pOCent, bla.lineRange.radius, 0x0000ff, 8);
 			}
 
 			// if (calc.getDistance(bla.p1,bla.p) >= Math.abs(blaX.lineRange.radius) ) {
@@ -172,7 +184,7 @@ export function CalcAidKorektPoint (cAid) {
 			if (arr.length != 0 && calc.getDistance(arr[0], lineP.p1) < maxDist) { // рядом
 				if (debug) {
 					drawArr(arr);
-					cAid.dPoint(arr[0], 8, 0x00ffff);
+					debug.dPoint(arr[0], 8, 0x00ffff);
 				}
 				lineP.p.setPoint(arr[0]);
 				lineP.p1.setPoint(arr[0]);
@@ -207,11 +219,11 @@ export function CalcAidKorektPoint (cAid) {
 			}
 
 			if (debug) {
-				cAid.dPoint(lineP.p1, 15, 0xff00ff);
-				cAid.dPoint(bla.maxp1, 6, 0x0000ff);
-				cAid.dPoint(lineP.p, 7, 0x0000ff);
-				cAid.dLine(lineP.p, bla.maxp1, 0x0000ff, 3);
-				cAid.dPoint(blaX.lineRange.pOCent, blaX.lineRange.radius, 0x0000ff, 8);
+				debug.dPoint(lineP.p1, 15, 0xff00ff);
+				debug.dPoint(bla.maxp1, 6, 0x0000ff);
+				debug.dPoint(lineP.p, 7, 0x0000ff);
+				debug.dLine(lineP.p, bla.maxp1, 0x0000ff, 3);
+				debug.dPoint(blaX.lineRange.pOCent, blaX.lineRange.radius, 0x0000ff, 8);
 			}
 
 			// if (calc.getDistance(bla.p1,bla.p) >= Math.abs(blaX.lineRange.radius) ) {
@@ -220,7 +232,7 @@ export function CalcAidKorektPoint (cAid) {
 			if (arr.length != 0 && calc.getDistance(arr[0], lineP.p1) < maxDist) { // рядом
 				if (debug) {
 					drawArr(arr);
-					cAid.dPoint(arr[0], 8, 0x00ffff);
+					debug.dPoint(arr[0], 8, 0x00ffff);
 				}
 				lineP.p.setPoint(arr[0]);
 				lineP.p1.setPoint(arr[0]);
@@ -248,13 +260,13 @@ export function CalcAidKorektPoint (cAid) {
 
 			arr = calc.getCircleCircleIntersectionPoints(bla.lineRange.pOCent, bla.lineRange.radius, blaX.lineRange.pOCent, blaX.lineRange.radius);
 			if (debug) {
-				cAid.dPoint(bla.lineRange.pOCent, bla.lineRange.radius, 0x0000ff, 8);
-				cAid.dPoint(blaX.lineRange.pOCent, blaX.lineRange.radius, 0x0000ff, 8);
+				debug.dPoint(bla.lineRange.pOCent, bla.lineRange.radius, 0x0000ff, 8);
+				debug.dPoint(blaX.lineRange.pOCent, blaX.lineRange.radius, 0x0000ff, 8);
 			}
 			if (arr.length != 0) { // рядом
 				if (arr.length == 1) {
 					if (debug) {
-						cAid.dPoint(arr[0], 8, 0x00ffff);
+						debug.dPoint(arr[0], 8, 0x00ffff);
 					}
 					lineP.p.setPoint(arr[0]);
 					lineP.p1.setPoint(arr[0]);
@@ -276,14 +288,14 @@ export function CalcAidKorektPoint (cAid) {
 
 					if (debug) {
 						drawArr(arr);
-						cAid.dPoint(arr[0], 8, 0x00ffff);
-						cAid.dPoint(lineP.p2, 10, 0xf0ffff);
+						debug.dPoint(arr[0], 8, 0x00ffff);
+						debug.dPoint(lineP.p2, 10, 0xf0ffff);
 					}
 					if (dis < (bla.delph + blaX.delph) && dis < maxDist) {
 						lineP.p.setPoint(point);
 						lineP.p1.setPoint(point);
 					}
-					// cAid.dPoint(point, 10, 0xff0000);/**/
+					// debug.dPoint(point, 10, 0xff0000);/**/
 				}
 			}
 
@@ -297,7 +309,7 @@ export function CalcAidKorektPoint (cAid) {
 
 	function drawArr (arr) {
 		arr.forEach(function (p) {
-			cAid.dPoint(p, Math.random() * 5 + 6, 0xffffff * Math.random());
+			debug.dPoint(p, Math.random() * 5 + 6, 0xffffff * Math.random());
 		});
 	}
 }

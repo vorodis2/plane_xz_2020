@@ -58,7 +58,21 @@ export class MOSten extends MOBaza {
             this.slid.width=this.width-this.otstup1*2;
             this.slid.okrug=1;
 
-            this.window.height=this.slid.y+50+32;
+            
+
+            new DLabel(this.window.content, 2,this.otstup1+ (this.otstup1+this.wh)*2+12,"idUi : sUi")
+            this.input=new DInput(this.window.content, 72,this.otstup1+ (this.otstup1+this.wh)*2,"" ,function(s){ 
+                self.object.idUi=this.value*1
+            })
+            this.input.width= 70  
+
+            this.input1=new DInput(this.window.content, 148,this.otstup1+ (this.otstup1+this.wh)*2,"" ,function(s){ 
+                self.object.sUi=this.value*1
+            })
+            this.input1.width= 70      
+
+            this.window.height=this.input.y+50+32;
+         
 /*
 
             this.slid1=new DSliderBig(this.window.content, this.otstup1,this.otstup1+ (this.otstup1+this.wh)*2, function(s){ 
@@ -111,15 +125,17 @@ export class MOSten extends MOBaza {
         
         this.drag=function(){
             self.slid.value=self.object.delph; 
+            self.input.value=self.object.idUi; 
+            self.input1.value=self.object.sUi; 
             //self.slid1.value=self.object.height;           
            /* for (var i = 0; i < self.arrayGal.length; i++) {
                 if(self.arrayGal[i].id==self.object.col3d)self.gallery.index=i;
                 if(self.arrayGal[i].id==self.object.col3d1)self.gallery.index1=i;
             }*/
 
-          
-            if(!self.object.boolText)self.button1.alpha=1
-            else self.button1.alpha=0.5
+            
+            if(!self.object.boolText)self.button1.alpha=1;
+            else self.button1.alpha=0.5;
         }
 
 
@@ -127,7 +143,8 @@ export class MOSten extends MOBaza {
        
 
         this.postSO=function(){ 
-            this.object.funDragMenu=this.drag 
+            this.object.funDragMenu=this.drag
+            this.window.title="Sten "+this.object.idArr+" : "+ this.object.idUi;
             this.drag();
         }
         this.clear=function(){

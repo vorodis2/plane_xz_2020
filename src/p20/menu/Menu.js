@@ -3,6 +3,8 @@ import { MLeft } from './MLeft.js';
 import { MDragScane } from './MDragScane.js';
 import { MObject } from './MObject.js';
 
+import { LocalStorage } from './LocalStorageE6.js';
+
 export class Menu  {
     constructor(fun) {    	
 		this.type="Menu";		
@@ -14,14 +16,18 @@ export class Menu  {
 		this.otstup1=10;
 		window.dcmParam = new DCM();//интерфейс
 		dcmParam.activButton="#f28044";
-
+		this._menuIndex=0;
 	    this.dCont=new DCont(document.body);	
+
+
+	    this.localStorage=new LocalStorage(function(){},"planer2020")
+
 
 	    var array=[];
 	    this.array=array
 	    array.push(new MStart(this, 0));	
 	    this.array[this.array.length]=this.mLeft=new MLeft(this, function(s,p){             
-           	if(s=="index")self.mLeft.index=p;
+           	if(s=="index")self.menuIndex=p;
         });
 
 		this.array[this.array.length]=this.mDragScane=new MDragScane(this, function(s,p){             
@@ -120,6 +126,15 @@ export class Menu  {
 	    	}
 	    }
 	}
+
+	set menuIndex(value) {		
+        if(this._menuIndex!=value){
+            this._menuIndex= value;
+            this.mLeft.index=value;
+            this.mDragScane.menuIndex= value;
+        }
+    }    
+    get menuIndex() { return  this._menuIndex;}
 } 
 
 
@@ -150,20 +165,27 @@ export class MStart  {
  
 
 
+    	setTimeout(function() {
+    		if(self.par.localStorage.object.model){
+    			//let o=JSON.parse(self.textArea.value);
+	        	self.par.fun("setObj",self.par.localStorage.object.model);
+	        	self.par.mDragScane.redrag();
+    		}
+    	}, 100);
 
-
-  
+  	
 
 	    var b = new DButton(this.w, 204, 2, "set",function(){
 	        let o=JSON.parse(self.textArea.value);
 	        self.par.fun("setObj",o);
+
 	    })
 	    b.width=b.height=par.wh-2;
 
 	    var b1 = new DButton(this.w, 204+par.wh+2, 2, "get",function(){
 	     
 	        var oo=self.par.mDragScane.p20.getObj()
-	        trace(oo)
+	        
 	        self.textArea.value=JSON.stringify(oo)
 	    })
 	    b1.width=b1.height=par.wh-2;	
@@ -172,6 +194,12 @@ export class MStart  {
 	        self.par.mDragScane.redrag();
 	    })
 	    b2.width=b2.height=par.wh-2;
+
+	    var b3 = new DButton(this.w, 204+(par.wh+2)*3, 2, "save",function(){
+	        self.par.localStorage.object.model=self.par.mDragScane.p20.getObj();
+	        self.par.localStorage.save();
+	    })
+	    b3.width=b3.height=par.wh-2;
 
 	    this.textArea=new DTextArea(this.w, 2, 2, "null",function(){
 	        

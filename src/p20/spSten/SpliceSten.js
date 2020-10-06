@@ -18,7 +18,8 @@ export function SpliceSten (_stage) {
 	this.stage = _stage;
 	this._boolText = true;
 	this._active = false;
-
+	this.idUi=Math.round(Math.random()*1000);
+	this.sUi = -1;
 
 	this._height = this.stage._height;
 	this.content2d = new PIXI.Container();
@@ -42,63 +43,10 @@ export function SpliceSten (_stage) {
     this.graphics.on('mousedown', this.onDragStart);
 
 
-
-    /**/
-
-    
-
-/*
-	this.content3d = new THREE.Object3D();
-	_stage.content3d.add(this.content3d);
-	this.content3d.gObj=this;
-	this.idRandom=Math.random();
-
-
-	this.funDragMenu=undefined;
-	this._activMouse=true;
-	this._col3d=_stage.col3d;
-	this._col3d1=_stage.col3d1;
-
-	this.materialSten = this.stage.pm.mat.getIDReturn(this._col3d);
-	this.materialSten1 = this.stage.pm.mat.getIDReturn(this._col3d1);	
-
-
-	this.materialVerh = this.stage.materialVerh;
-	this.materialVerh1 = this.stage.materialVerh1;
-
-
-	this.triangulateShape = this.stage.triangulateShape;
-
-
-	this.windows = new Windows(this, this.stage.isNot3D);
-	this.sten3D = new Sten3D(this);
-
-	this.arrayClass.push(this.windows);
-	this.arrayClass.push(this.sten3D);
-
-
-	this.content3d.add(this.sten3D.content3d);
-	this.content3d.add(this.windows.content3d);
-
-	this.stage.pm.visi3D.objShadow(this.content3d, true)
-
-
-	this.addBlok = function (_blok) {
-		return this.windows.addBlok(_blok)
-	}
-	this.removeBlok = function (_blok) {
-		return this.windows.removeBlok(_blok)
-	}
-
-	this.contains = function (_point) {
-		return this.sten2D.contains(_point);
-	};
-*/
-	
-
+    var alpha = 0.2+Math.random()*0.6
 
 	this.draw1 = function () {
-	
+
 		this.graphics.clear();
 		this.graphics.lineStyle(10, 0x555555, 0.8);
 		this.graphics.moveTo(0,0);
@@ -106,11 +54,7 @@ export function SpliceSten (_stage) {
 
 
 		this.graphics.lineStyle(0.1, Math.random()*0xffffff, 0.18);
-		this.graphics.beginFill(0x47aec8, 0.5);
-
-
-
-
+		this.graphics.beginFill(0x47aec8, alpha);
 
 		this.graphics.moveTo(-this.arrPosit[2].x,this.arrPosit[2].y);
 		this.graphics.lineTo(-this.arrPosit[1].x,this.arrPosit[1].y);
@@ -154,11 +98,9 @@ SpliceSten.prototype.getObj = function () {
 	o.type = this.type;
 	//o.windows = this.windows.getObj();
 	o.colorSten = this.colorSten;
-	o.boolText = this.boolText;
 	o.height = this.height;
-	o.height = this.height;
-	o.col3d=this.col3d
-	o.col3d1=this.col3d1	
+	o.sUi=this.sUi	
+	o.idUi=this.idUi	
 	return o;
 };
 SpliceSten.prototype.setObj = function (o) {
@@ -166,8 +108,9 @@ SpliceSten.prototype.setObj = function (o) {
 	//if (o.windows !== undefined) this.windows.setObj(o.windows);
 	if (o.boolText!== undefined)  this.boolText=o.boolText;
 	if (o.height!== undefined)  this.height=o.height;
-	if (o.col3d!== undefined ) this.col3d=o.col3d
-	if (o.col3d1!== undefined ) this.col3d1=o.col3d1
+	if (o.col3d!== undefined ) this.col3d=o.col3d;
+	if (o.idUi!== undefined ) this.idUi=o.idUi;
+	if (o.sUi!== undefined ) this.sUi=o.sUi;	
 	
 };
 SpliceSten.prototype.compare = function (_sten) {

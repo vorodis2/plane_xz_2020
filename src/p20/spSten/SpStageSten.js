@@ -2,6 +2,7 @@
 //import { TriangulateShape } from './TriangulateShape.js';
 import { SpliceSten } from './SpliceSten.js';
 import { SpPointSten } from './SpPointSten.js';
+import { SpDebugPixi } from './SpDebugPixi.js';
 //import { Pol3D } from './Pol3D.js';
 import { SpStage } from './../sp/SpStage.js';
 import {  Calc } from './../Calc.js';
@@ -19,6 +20,7 @@ export function SpStageSten (par, pm) {
 	this.tipSplice = 'SpliceSten';
 	this.tipPoint = 'SpPointSten';
 	this.fun = null;
+	
 
 
 	//this._mashtab = 1;
@@ -39,6 +41,12 @@ export function SpStageSten (par, pm) {
 	this.content2d = new PIXI.Container();
 
 	this.content2dPoint = new PIXI.Container();
+
+	this.debugPixi=new SpDebugPixi();
+	this.spCalc.setDebug(this.debugPixi)
+
+	this.cont2dDebug = new PIXI.Container();
+	this.cont2dDebug.addChild(this.debugPixi.content2d);
 
 	/*this.graphics = new PIXI.Graphics();
     this.content2d.addChild(this.graphics);
