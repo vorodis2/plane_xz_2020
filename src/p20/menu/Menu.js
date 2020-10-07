@@ -14,7 +14,7 @@ export class Menu  {
 		this.wh=48;
 		this.otstup=2;
 		this.otstup1=10;
-		window.dcmParam = new DCM();//интерфейс
+		window.dcmParam = new DCM();
 		dcmParam.activButton="#f28044";
 		this._menuIndex=0;
 	    this.dCont=new DCont(document.body);	

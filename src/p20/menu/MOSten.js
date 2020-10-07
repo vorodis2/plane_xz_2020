@@ -11,13 +11,7 @@ export class MOSten extends MOBaza {
 
         
        
-     /*   for (var i = 0; i < this.par.par.par.par.objectBase.three.length; i++) {
-            if(this.par.par.par.par.objectBase.three[i].keyName=="sten"){
-                this.arrayGal=this.par.par.par.par.objectBase.three[i].array;
-            }
-        }*/
-       
-
+  
         this.dCont=new DCont(par.dCont);
 
         
@@ -48,12 +42,9 @@ export class MOSten extends MOBaza {
 
 
             this.slid=new DSliderBig(this.window.content, this.otstup1,this.otstup1+ (this.otstup1+this.wh)*1, function(s){ 
-
-                self.object.delph=self.slid.value               
-               
+                self.object.delph=self.slid.value 
                 self.object._addPoint.dragGG(); 
-                self.object._addPoint1.dragGG(); 
-
+                self.object._addPoint1.dragGG();
             }, "delph",  5, 1000);
             this.slid.width=this.width-this.otstup1*2;
             this.slid.okrug=1;
@@ -64,26 +55,33 @@ export class MOSten extends MOBaza {
             this.input=new DInput(this.window.content, 72,this.otstup1+ (this.otstup1+this.wh)*2,"" ,function(s){ 
                 self.object.idUi=this.value*1
             })
-            this.input.width= 70  
+            this.input.width=70;  
 
             this.input1=new DInput(this.window.content, 148,this.otstup1+ (this.otstup1+this.wh)*2,"" ,function(s){ 
                 self.object.sUi=this.value*1
             })
-            this.input1.width= 70      
+            this.input1.width=70;      
 
-            this.window.height=this.input.y+50+32;
+            
          
-/*
 
-            this.slid1=new DSliderBig(this.window.content, this.otstup1,this.otstup1+ (this.otstup1+this.wh)*2, function(s){ 
-                self.object.height=self.slid1.value;  
-                self.object._addPoint.dragGG() 
-                self.object._addPoint1.dragGG()              
-                //self.object.stage._height=self.slid1.value                
-            }, "height",  10, 300)
+
+            this.slid1=new DSliderBig(this.window.content, this.otstup1,this.otstup1+ (this.otstup1+this.wh)*2+36, function(s){ 
+                self.object.offset=self.slid1.value;  
+                self.object._addPoint.dragVokrug(); 
+                self.object._addPoint1.dragVokrug();              
+                            
+            }, "offset", -1000, 1000);
             this.slid1.width=this.width-this.otstup1*2;
-            this.slid1.okrug=1;
+            this.slid1.okrug=1;           
 
+            this.window.height=this.slid1.y+50+32;
+
+
+
+
+
+/*
             
             
              this.gallery=new DGSten(this.window.content,this.otstup1,120+(this.otstup1+this.wh),function(s,p){

@@ -62,12 +62,12 @@ export function CalcAidKorektPoint (cAid) {
 
 			angel = calc.getTreeAngel(bla.p, bla.p1, blaX.p);
 
-			if (debug) {
+			/*if (debug) {
 				
 				debug.dPoint(lineP.p1, 15, 0xff00ff);
 				debug.dPoint(lineP.p, 7, 0x0000ff);
 				debug.dLine(lineP.p, blaX.maxp1, 0x0000ff, 3);
-			}
+			}*/
 
 			// if(Math.abs(Math.round(angel*1000))
 			if (Math.abs(Math.round(angel * 100)) == 314) { // паралели
@@ -170,22 +170,22 @@ export function CalcAidKorektPoint (cAid) {
 				}
 			}
 
-			if (debug) {
+			/*if (debug) {
 				debug.dPoint(blaX.maxp1, 6, 0x0000ff);
 				debug.dPoint(lineP.p1, 15, 0xff00ff);
 				debug.dPoint(lineP.p, 7, 0x0000ff);
 				debug.dLine(lineP.p, blaX.maxp1, 0x0000ff, 3);
 				debug.dPoint(bla.lineRange.pOCent, bla.lineRange.radius, 0x0000ff, 8);
-			}
+			}*/
 
 			// if (calc.getDistance(bla.p1,bla.p) >= Math.abs(blaX.lineRange.radius) ) {
 			// 	maxDist = otDin*4
 			// }
 			if (arr.length != 0 && calc.getDistance(arr[0], lineP.p1) < maxDist) { // рядом
-				if (debug) {
+				/*if (debug) {
 					drawArr(arr);
 					debug.dPoint(arr[0], 8, 0x00ffff);
-				}
+				}*/
 				lineP.p.setPoint(arr[0]);
 				lineP.p1.setPoint(arr[0]);
 				return lineP;
@@ -218,22 +218,22 @@ export function CalcAidKorektPoint (cAid) {
 				}
 			}
 
-			if (debug) {
+			/*if (debug) {
 				debug.dPoint(lineP.p1, 15, 0xff00ff);
 				debug.dPoint(bla.maxp1, 6, 0x0000ff);
 				debug.dPoint(lineP.p, 7, 0x0000ff);
 				debug.dLine(lineP.p, bla.maxp1, 0x0000ff, 3);
 				debug.dPoint(blaX.lineRange.pOCent, blaX.lineRange.radius, 0x0000ff, 8);
-			}
+			}*/
 
 			// if (calc.getDistance(bla.p1,bla.p) >= Math.abs(blaX.lineRange.radius) ) {
 			// 	maxDist = otDin*4
 			// }
 			if (arr.length != 0 && calc.getDistance(arr[0], lineP.p1) < maxDist) { // рядом
-				if (debug) {
+				/*if (debug) {
 					drawArr(arr);
 					debug.dPoint(arr[0], 8, 0x00ffff);
-				}
+				}*/
 				lineP.p.setPoint(arr[0]);
 				lineP.p1.setPoint(arr[0]);
 				return lineP;
@@ -259,15 +259,15 @@ export function CalcAidKorektPoint (cAid) {
 			lineP.p2.setPoint(bla.lineRange1.p);
 
 			arr = calc.getCircleCircleIntersectionPoints(bla.lineRange.pOCent, bla.lineRange.radius, blaX.lineRange.pOCent, blaX.lineRange.radius);
-			if (debug) {
+			/*if (debug) {
 				debug.dPoint(bla.lineRange.pOCent, bla.lineRange.radius, 0x0000ff, 8);
 				debug.dPoint(blaX.lineRange.pOCent, blaX.lineRange.radius, 0x0000ff, 8);
-			}
+			}*/
 			if (arr.length != 0) { // рядом
 				if (arr.length == 1) {
-					if (debug) {
+					/*if (debug) {
 						debug.dPoint(arr[0], 8, 0x00ffff);
-					}
+					}*/
 					lineP.p.setPoint(arr[0]);
 					lineP.p1.setPoint(arr[0]);
 					// this.dPoint(arr[0], 10, 0xff0000);
@@ -286,11 +286,11 @@ export function CalcAidKorektPoint (cAid) {
 						point = arr[1];
 					}
 
-					if (debug) {
+					/*if (debug) {
 						drawArr(arr);
 						debug.dPoint(arr[0], 8, 0x00ffff);
 						debug.dPoint(lineP.p2, 10, 0xf0ffff);
-					}
+					}*/
 					if (dis < (bla.delph + blaX.delph) && dis < maxDist) {
 						lineP.p.setPoint(point);
 						lineP.p1.setPoint(point);
@@ -309,7 +309,7 @@ export function CalcAidKorektPoint (cAid) {
 
 	function drawArr (arr) {
 		arr.forEach(function (p) {
-			debug.dPoint(p, Math.random() * 5 + 6, 0xffffff * Math.random());
+			//debug.dPoint(p, Math.random() * 5 + 6, 0xffffff * Math.random());
 		});
 	}
 }

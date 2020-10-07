@@ -29,7 +29,29 @@ export function BlaXZNaDva (_otstup) {
 	this.angel = 0;
 	var maxR = 20000;
 	var dd;
-	this.restertTip = function (_tip, p, p1, p2) {
+	this.restertTip = function (_tip, p, p1, p2,_ots,_b) {
+		
+		if(_ots!=undefined &&_ots!==0){
+			
+			this.angel = calc.getAngle(p, p1);
+			//if(_b!=true)calc.getVector(_ots, this.angel + Math.PI/2, this.p);
+			//else 
+				calc.getVector(_ots, this.angel + Math.PI/2, this.p);
+
+			p.x+=this.p.x;
+			p.y+=this.p.y;
+
+			p1.x+=this.p.x;
+			p1.y+=this.p.y;
+
+
+			p2.x+=this.p.x;
+			p2.y+=this.p.y;
+			
+
+			/**/
+
+		}/**/
 
 		this.tip = _tip;
 		if (_tip == 0) {	// даюе линию со всеми потрахами
@@ -97,38 +119,39 @@ export function BlaXZNaDva (_otstup) {
 	};
 
 
-	/*this.drawDebag = function (_par, color, color2) {
-		console.warn("drawDebag")
-		if (!this.debug) return;
+	this.drawDebag = function (objDebug, color, color2) {
+		//console.warn("drawDebag",objDebug)
+		if (objDebug==undefined) return;
+
 		if (this.tip == 0) {
-			_par.dLine(this.p, this.maxp, color2);
-			_par.dLine(this.p1, this.maxp1, color2);
-			_par.dLine(this.maxSp1, this.maxp1, color2, 0.5);
+			objDebug.dLine(this.p, this.maxp, color2);
+			objDebug.dLine(this.p1, this.maxp1, color2);
+			objDebug.dLine(this.maxSp1, this.maxp1, color2, 0.5*10);
 
-			_par.dLine(this.p, this.p3, color, 3.5);
+			objDebug.dLine(this.p, this.p3, color, 3.5*10);
 
 
-			_par.dLine(this.p, this.p1, color);
-			_par.dLine(this.p1, this.p2, color);
-			_par.dPoint(this.p, 1, color);
-			_par.dPoint(this.p1, 1, color);
-			_par.dPoint(this.p2, 1, color);
+			objDebug.dLine(this.p, this.p1, color);
+			objDebug.dLine(this.p1, this.p2, color);
+			objDebug.dPoint(this.p, 1*10, color);
+			objDebug.dPoint(this.p1, 1*10, color);
+			objDebug.dPoint(this.p2, 1*10, color);/**/
 		}
-		if (this.tip == 1) {
-			_par.dPoint(this.lineRange.pOCent, 1, color);
-			_par.dPoint(this.lineRange.pOCent, this.lineRange.radius, color);
+		/*if (this.tip == 1) {
+			objDebug.dPoint(this.lineRange.pOCent, 1, color);
+			objDebug.dPoint(this.lineRange.pOCent, this.lineRange.radius, color);
 
-			_par.dPoint(this.lineRange.p, 3, color);
-			_par.dPoint(this.lineRange.p1, 4, color);
-			_par.dPoint(this.lineRange.p2, 5, color);
+			objDebug.dPoint(this.lineRange.p, 3, color);
+			objDebug.dPoint(this.lineRange.p1, 4, color);
+			objDebug.dPoint(this.lineRange.p2, 5, color);
 
-			_par.dPoint(this.lineRange1.p, 3, color);
-			_par.dPoint(this.lineRange1.p1, 4, color);
-			_par.dPoint(this.lineRange1.p2, 5, color);
+			objDebug.dPoint(this.lineRange1.p, 3, color);
+			objDebug.dPoint(this.lineRange1.p1, 4, color);
+			objDebug.dPoint(this.lineRange1.p2, 5, color);
 
 
-			_par.dLine(this.lineRange1.p, this.lineRange.p, color);
-		}
-	};*/
+			objDebug.dLine(this.lineRange1.p, this.lineRange.p, color);
+		}*/
+	};
 
 }

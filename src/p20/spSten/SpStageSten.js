@@ -43,55 +43,12 @@ export function SpStageSten (par, pm) {
 	this.content2dPoint = new PIXI.Container();
 
 	this.debugPixi=new SpDebugPixi();
-	this.spCalc.setDebug(this.debugPixi)
+	this.spCalc.setDebug(this.debugPixi);
 
 	this.cont2dDebug = new PIXI.Container();
 	this.cont2dDebug.addChild(this.debugPixi.content2d);
 
-	/*this.graphics = new PIXI.Graphics();
-    this.content2d.addChild(this.graphics);
-	this.graphics.beginFill(Math.random()*0xffffff, 0.5);
-    this.graphics.drawCircle(0,0,200);*/
-/*
-	this.col3d="null";//сторона стенки
-	this.col3d1="null";//сторона стенки 
-	this.col3d2="null";//полы
 
-
-	for (var i = 0; i < this.pm.objbase.three.length; i++) {
-        if(this.pm.objbase.three[i].keyName=="sten"){
-        	this.col3d=this.pm.objbase.three[i].array[0].id;
-			this.col3d1=this.pm.objbase.three[i].array[0].id;                
-        }
-        if(this.pm.objbase.three[i].keyName=="pol"){
-        	this.col3d2=this.pm.objbase.three[i].array[0].id;
-        }
-    }
-
-
-	this.visi3D=undefined;
-
-	this.triangulateShape=new TriangulateShape()
-
-	this.content3d = new THREE.Object3D();
-
-	this.content3dPoint = new THREE.Object3D();
-	this.content3d.add(this.content3dPoint)
-
-
-	this.materialVerh = new THREE.MeshLambertMaterial({color: new THREE.Color(150 / 255, 150 / 255, 150 / 255)});
-	this.materialVerh.side = THREE.DoubleSide;
-
-	this.boxGeometry111 = new THREE.BoxGeometry(1, 1, 1);
-	this.cylinderGeometry = new THREE.CylinderGeometry( 1,1,1,22)
-
-	this.cylinderMaterial = new THREE.MeshPhongMaterial({color:0x79bccc})
-
-	this.materialVerh1 = this.cylinderMaterialActive = new THREE.MeshPhongMaterial({color:0x005a88})
-
-
-	this.materialActivePol  = new THREE.MeshPhongMaterial({color:0x005a88,transparent:true,opacity:0.1})
-	this.materialActivePol.side = THREE.DoubleSide;*/
 	
 	this.getPoint=function(){ return new SpPointSten(this);}
 	this.getSplice=function(){ 
@@ -128,12 +85,15 @@ export function SpStageSten (par, pm) {
 
 	this.doRender=function(){
 
-		if(self.arrObj.length==0)return false;		
+		if(self.arrObj.length==0)return false;	
+		//this.debugPixi.clearD();
+
 		for (let i = 0; i < self.arrObj.length; i++) {
 			self.arrObj[i].dragPost();
 			
 		}
 		self.arrObj.length=0;
+
 		return true;	
 	}
 

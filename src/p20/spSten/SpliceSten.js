@@ -20,6 +20,7 @@ export function SpliceSten (_stage) {
 	this._active = false;
 	this.idUi=Math.round(Math.random()*1000);
 	this.sUi = -1;
+	this._offset=0;
 
 	this._height = this.stage._height;
 	this.content2d = new PIXI.Container();
@@ -44,6 +45,8 @@ export function SpliceSten (_stage) {
 
 
     var alpha = 0.2+Math.random()*0.6
+    var c1 = 0x47aec8;
+    var c2 = 0x47ae00;
 
 	this.draw1 = function () {
 
@@ -52,9 +55,12 @@ export function SpliceSten (_stage) {
 		this.graphics.moveTo(0,0);
 		this.graphics.lineTo(this._distans,0);
 
+		this.graphics.drawCircle(500,0,50);
 
 		this.graphics.lineStyle(0.1, Math.random()*0xffffff, 0.18);
-		this.graphics.beginFill(0x47aec8, alpha);
+		this.graphics.beginFill(this._offset==0 ? c1 : c2, alpha);
+
+
 
 		this.graphics.moveTo(-this.arrPosit[2].x,this.arrPosit[2].y);
 		this.graphics.lineTo(-this.arrPosit[1].x,this.arrPosit[1].y);
@@ -100,7 +106,8 @@ SpliceSten.prototype.getObj = function () {
 	o.colorSten = this.colorSten;
 	o.height = this.height;
 	o.sUi=this.sUi	
-	o.idUi=this.idUi	
+	o.offset=this.offset
+		
 	return o;
 };
 SpliceSten.prototype.setObj = function (o) {
@@ -111,6 +118,7 @@ SpliceSten.prototype.setObj = function (o) {
 	if (o.col3d!== undefined ) this.col3d=o.col3d;
 	if (o.idUi!== undefined ) this.idUi=o.idUi;
 	if (o.sUi!== undefined ) this.sUi=o.sUi;	
+	if (o.offset!== undefined ) this.offset=o.offset;	
 	
 };
 SpliceSten.prototype.compare = function (_sten) {
@@ -217,6 +225,19 @@ Object.defineProperties(SpliceSten.prototype, {
 		},
 		get: function () { return this._col3d1; }
 	},
+
+	offset: {
+		set: function (value) {
+			if (this._offset === value) return;
+			this._offset = value;	
+			trace(this._offset)	
+			this._setAllParam('offset', this._offset);
+			if(this.funDragMenu!=undefined)this.funDragMenu();
+			this.stage.render()
+		},
+		get: function () { return this._offset; }
+	},
+	
 
 });
 

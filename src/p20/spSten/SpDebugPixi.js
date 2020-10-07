@@ -33,10 +33,10 @@ export class SpDebugPixi  {
 			trace(p, r, color, wL)
 			this.graphics = new PIXI.Graphics();
 			this.contentDebag.addChild(this.graphics);
-			r = r || 5;
+			r = r || 50;
 			if (color == undefined)color = 0xFF0000;
-			wL = wL || 1;
-			this.graphics.lineStyle(1, color, wL);
+			wL = wL || 10;
+			this.graphics.lineStyle(10, color, wL);
 			this.graphics.beginFill(color);
 			this.graphics.drawCircle(p.x, p.y, r);
 		};
@@ -49,7 +49,7 @@ export class SpDebugPixi  {
 		this.dLine = function (p, p1, color, wL) {
 			//if (this.debagOk(aP) == false) return;
 			if (color == undefined)color = 0xFF0000;
-			if (wL == undefined)wL = 1;
+			if (wL == undefined)wL = 10;
 			g.endFill();
 			g.lineStyle(wL, color, wL);
 			g.moveTo(p.x, p.y);
@@ -58,21 +58,21 @@ export class SpDebugPixi  {
 		};
 		this.dPoint = function (p, r, color, wL) {
 			//if (this.debagOk(aP) == false) return;
-			r = r || 5;
+			r = r || 50;
 			if (r > 1000000) {
 				console.warn('Большой круг рисовать не буду', r);
 				return;
 			}
 			if (color == undefined)color = 0xFF0000;
-			wL = wL || 1;
-			g.lineStyle(1, color, wL);
+			wL = wL || 10;
+			g.lineStyle(10, color, wL);
 			g.drawCircle(p.x, p.y, r);
 			g.endFill();
 		};
 
 
 		this.dLinePosition = function (p, color) {
-			var rr = 2.5;
+			var rr = 20.5;
 			g.lineStyle(rr, color, rr);
 
 			g.moveTo(p.p.x, p.p.y);
