@@ -21,20 +21,35 @@ export function SpliceSten (_stage) {
 	this.idUi=Math.round(Math.random()*1000);
 	this.sUi = -1;
 	this._offset=0;
+	this._bChaz=false;
 
 	this._height = this.stage._height;
+	
 	this.content2d = new PIXI.Container();
 	_stage.content2d.addChild(this.content2d);
-
 	
 	this.graphics = new PIXI.Graphics();
     this.content2d.addChild(this.graphics);
     this.graphics.interactive = true;
-    
 
-    this.graphics.beginFill(Math.random()*0xffffff, 0.5);
-    this.graphics.drawCircle(0,0,150);
 
+    this.content2d1 = new PIXI.Container();
+	_stage.content2d1.addChild(this.content2d1);
+	
+	this.graphics1 = new PIXI.Graphics();
+    this.content2d1.addChild(this.graphics1);
+
+   /* this.ddd=function(){
+    	if(self._offset!=0){
+    		console.warn("====",self.arrPosit1[2].y)
+    		
+    	}
+    }
+
+    this.arrPosit1[2]=new PositionFun(0,0,this.ddd)*/
+
+    var sahh=0
+    this.arrVorur = [new Position(), new Position(), new Position(), new Position(), new Position(), new Position()];
 
     this.onDragStart=function(e){
     	if(_stage.par.sobSP!=undefined)_stage.par.sobSP("downSten",self,e)
@@ -44,9 +59,10 @@ export function SpliceSten (_stage) {
     this.graphics.on('mousedown', this.onDragStart);
 
 
-    var alpha = 0.2+Math.random()*0.6
-    var c1 = 0x47aec8;
+    var alpha = 1//0.8+Math.random()*0.2
+    var c1 = 0x47aec8//*(1+this.idArr*0.001);
     var c2 = 0x47ae00;
+
 
 	this.draw1 = function () {
 
@@ -61,10 +77,41 @@ export function SpliceSten (_stage) {
 		this.graphics.beginFill(this._offset==0 ? c1 : c2, alpha);
 
 
+		sahh=0
+
+
+		this.plusVor(-this.arrPosit[2].x,this.arrPosit[2].y)
+		this.plusVor(-this.arrPosit[1].x,this.arrPosit[1].y)
+		this.plusVor(-this.arrPosit[0].x,this.arrPosit[0].y)
+
+		this.plusVor(this.arrPosit1[5].x+this._distans,this.arrPosit1[5].y)
+		this.plusVor(this.arrPosit1[4].x+this._distans,this.arrPosit1[4].y)
+		this.plusVor(this.arrPosit1[3].x+this._distans,this.arrPosit1[3].y)
+
+
+		this.plusVor(this.arrPosit1[2].x+this._distans,this.arrPosit1[2].y)		
+		this.plusVor(this.arrPosit1[1].x+this._distans,this.arrPosit1[1].y)
+		this.plusVor(this.arrPosit1[0].x+this._distans,this.arrPosit1[0].y)
+
+
+
+		this.plusVor(-this.arrPosit[5].x,this.arrPosit[5].y)
+		this.plusVor(-this.arrPosit[4].x,this.arrPosit[4].y)
+		this.plusVor(-this.arrPosit[3].x,this.arrPosit[3].y)/**/
+
+
+
+
+
+
+
+		
 
 		this.graphics.moveTo(-this.arrPosit[2].x,this.arrPosit[2].y);
 		this.graphics.lineTo(-this.arrPosit[1].x,this.arrPosit[1].y);
 		this.graphics.lineTo(-this.arrPosit[0].x,this.arrPosit[0].y);
+
+		
 
 		
 		this.graphics.lineTo(this.arrPosit1[5].x+this._distans,this.arrPosit1[5].y);
@@ -80,7 +127,39 @@ export function SpliceSten (_stage) {
 		this.graphics.lineTo(-this.arrPosit[4].x,this.arrPosit[4].y);
 		this.graphics.lineTo(-this.arrPosit[3].x,this.arrPosit[3].y);
 
+
+
+		this.graphics1.clear();
+		this.graphics1.lineStyle(30, 0x333333, 1);		
+		this.graphics1.moveTo(this.arrVorur[0].x,this.arrVorur[0].y);		
+		for (var i = 1; i < this.arrVorur.length; i++) {		
+			this.graphics1.lineTo(this.arrVorur[i].x,this.arrVorur[i].y);
+		}
+		this.graphics1.lineTo(this.arrVorur[0].x,this.arrVorur[0].y);
+		
+
 	}
+
+
+	this.plusVor = function (_x,_y) {		
+		if(sahh==0){
+			this.arrVorur[sahh].set(_x,_y)
+			sahh++;
+		}else{
+			//if(this.idArr==16)trace(sahh+"==",_x,_y,"::",this.arrVorur[sahh-1].x,this.arrVorur[sahh-1].y)
+			if(this.arrVorur[sahh-1].x!=_x||this.arrVorur[sahh-1].y!=_y){			
+
+				if(sahh<this.arrVorur.length){
+					this.arrVorur[sahh].set(_x,_y)
+					sahh++;
+				}else{
+					//if(this.idArr==16)trace("d")				 	
+				
+				}
+			}
+		}
+	}
+
 
 
 
@@ -88,6 +167,10 @@ export function SpliceSten (_stage) {
 		this.content2d.x=this.position.x;
 		this.content2d.y=this.position.y;
 		this.content2d.rotation=this._rotation;
+
+		this.content2d1.x=this.position.x;
+		this.content2d1.y=this.position.y;
+		this.content2d1.rotation=this._rotation;
 
 		this.draw1();
 
@@ -106,8 +189,8 @@ SpliceSten.prototype.getObj = function () {
 	o.colorSten = this.colorSten;
 	o.height = this.height;
 	o.sUi=this.sUi	
-	o.offset=this.offset
-		
+	o.offset=this.offset;
+	o.bChaz=this.bChaz;
 	return o;
 };
 SpliceSten.prototype.setObj = function (o) {
@@ -118,7 +201,8 @@ SpliceSten.prototype.setObj = function (o) {
 	if (o.col3d!== undefined ) this.col3d=o.col3d;
 	if (o.idUi!== undefined ) this.idUi=o.idUi;
 	if (o.sUi!== undefined ) this.sUi=o.sUi;	
-	if (o.offset!== undefined ) this.offset=o.offset;	
+	if (o.offset!== undefined ) this.offset=o.offset;
+	if (o.bChaz!== undefined ) this.bChaz=o.bChaz;	
 	
 };
 SpliceSten.prototype.compare = function (_sten) {
@@ -139,7 +223,7 @@ SpliceSten.prototype.restart = function () {
 SpliceSten.prototype.drag = function () {
 	Splice.prototype.drag.call(this);
 	this.stage.addObjFun(this);
-	//trace(">>>>",this);
+	
 };
 Object.defineProperties(SpliceSten.prototype, {
 
@@ -193,6 +277,9 @@ Object.defineProperties(SpliceSten.prototype, {
 			}
 			if(this._life==true)this.stage.content2d.addChild(this.content2d);
 			else if(this.content2d.parent!=undefined)this.content2d.parent.removeChild(this.content2d);
+
+			if(this._life==true)this.stage.content2d1.addChild(this.content2d1);
+			else if(this.content2d1.parent!=undefined)this.content2d1.parent.removeChild(this.content2d1);
 		},
 		get: function () { return this._life; }
 	},
@@ -230,13 +317,27 @@ Object.defineProperties(SpliceSten.prototype, {
 		set: function (value) {
 			if (this._offset === value) return;
 			this._offset = value;	
-			trace(this._offset)	
+		
 			this._setAllParam('offset', this._offset);
 			if(this.funDragMenu!=undefined)this.funDragMenu();
 			this.stage.render()
 		},
 		get: function () { return this._offset; }
 	},
+	
+	bChaz: {
+		set: function (value) {
+			if (this._bChaz === value) return;
+			this._bChaz = value;	
+		
+			this._setAllParam('bChaz', this._bChaz);
+			if(this.funDragMenu!=undefined)this.funDragMenu();
+			this.stage.render()
+		},
+		get: function () { return this._bChaz; }
+	},
+
+	
 	
 
 });

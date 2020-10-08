@@ -29,14 +29,22 @@ export function BlaXZNaDva (_otstup) {
 	this.angel = 0;
 	var maxR = 20000;
 	var dd;
-	this.restertTip = function (_tip, p, p1, p2,_ots,_b) {
+	this.restertTip = function (_tip, p, p1, p2,_sten,_b) {
 		
-		if(_ots!=undefined &&_ots!==0){
+		if(_sten!=undefined &&_sten._offset!==0){
 			
+
+			dd=calc.getDistance(p, _sten.position);
+			if(dd<_sten.delph)_b=true 
+			else _b=false
+			
+
 			this.angel = calc.getAngle(p, p1);
-			//if(_b!=true)calc.getVector(_ots, this.angel + Math.PI/2, this.p);
-			//else 
-				calc.getVector(_ots, this.angel + Math.PI/2, this.p);
+			if(_b!=true)calc.getVector(_sten._offset, this.angel - Math.PI/2, this.p);
+			else calc.getVector(_sten._offset, this.angel + Math.PI/2, this.p);
+				
+			//calc.getVector(_ots, this.angel - Math.PI/2, this.p);
+
 
 			p.x+=this.p.x;
 			p.y+=this.p.y;
@@ -48,10 +56,11 @@ export function BlaXZNaDva (_otstup) {
 			p2.x+=this.p.x;
 			p2.y+=this.p.y;
 			
+		
+			_sten.arrPosit[2].y=_sten.arrPosit[3].y=0
+			_sten.arrPosit1[2].y=_sten.arrPosit1[3].y=0
 
-			/**/
-
-		}/**/
+		}
 
 		this.tip = _tip;
 		if (_tip == 0) {	// даюе линию со всеми потрахами
@@ -126,10 +135,11 @@ export function BlaXZNaDva (_otstup) {
 		if (this.tip == 0) {
 			objDebug.dLine(this.p, this.maxp, color2);
 			objDebug.dLine(this.p1, this.maxp1, color2);
-			objDebug.dLine(this.maxSp1, this.maxp1, color2, 0.5*10);
+			objDebug.dLine(this.maxSp1, this.maxp1, color2, 10);
 
-			objDebug.dLine(this.p, this.p3, color, 3.5*10);
+			objDebug.dLine(this.p, this.p3, color, 10);
 
+			objDebug.dPoint(this.p3, 1*10, color);
 
 			objDebug.dLine(this.p, this.p1, color);
 			objDebug.dLine(this.p1, this.p2, color);

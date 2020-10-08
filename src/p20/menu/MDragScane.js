@@ -249,7 +249,7 @@ export class MDragScane  {
             this.graphics.on('mousedown', this.onDragStart);
         }  
 
-        this.redrag  = function(){            
+        this.redrag  = function(){  
             this.p20.creatRect()
             this.cont.x=this.p20.rectXX1.xs;
             this.cont.y=this.p20.rectXX1.ys;

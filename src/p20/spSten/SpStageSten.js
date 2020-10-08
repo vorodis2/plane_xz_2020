@@ -39,6 +39,7 @@ export function SpStageSten (par, pm) {
 
 	this.boolText = true;
 	this.content2d = new PIXI.Container();
+	this.content2d1 = new PIXI.Container();
 
 	this.content2dPoint = new PIXI.Container();
 

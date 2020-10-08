@@ -52,16 +52,21 @@ export class MOSten extends MOBaza {
             
 
             new DLabel(this.window.content, 2,this.otstup1+ (this.otstup1+this.wh)*2+12,"idUi : sUi")
-            this.input=new DInput(this.window.content, 72,this.otstup1+ (this.otstup1+this.wh)*2,"" ,function(s){ 
+            this.input=new DInput(this.window.content, 92,this.otstup1+ (this.otstup1+this.wh)*2,"" ,function(s){ 
                 self.object.idUi=this.value*1
             })
-            this.input.width=70;  
+            this.input.width=60;  
 
-            this.input1=new DInput(this.window.content, 148,this.otstup1+ (this.otstup1+this.wh)*2,"" ,function(s){ 
+            this.input1=new DInput(this.window.content, 158,this.otstup1+ (this.otstup1+this.wh)*2,"" ,function(s){ 
                 self.object.sUi=this.value*1
             })
-            this.input1.width=70;      
+            this.input1.width=60; 
 
+
+            this.chek=new DCheckBox(this.window.content, 72,this.otstup1+ (this.otstup1+this.wh)*2+5," " ,function(s){ 
+                self.object.bChaz=this.value*1;
+            })
+            
             
          
 
@@ -125,6 +130,9 @@ export class MOSten extends MOBaza {
             self.slid.value=self.object.delph; 
             self.input.value=self.object.idUi; 
             self.input1.value=self.object.sUi; 
+            self.slid1.value=self.object._offset;
+            self.chek.value=self.object._bChaz; 
+            trace("self.object._bChaz",self.object._bChaz)
             //self.slid1.value=self.object.height;           
            /* for (var i = 0; i < self.arrayGal.length; i++) {
                 if(self.arrayGal[i].id==self.object.col3d)self.gallery.index=i;

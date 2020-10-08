@@ -46,6 +46,7 @@ export class P20  {
         this.rectXX1={x:0,x1:0,y:0,y1:0,s:1,xs:0,ys:0}
 
         this.sp=new SpStageSten(this);
+        this.content2d.addChild(this.sp.content2d1);
         this.content2d.addChild(this.sp.content2d);
         this.content2d.addChild(this.sp.content2dPoint);
 
@@ -75,6 +76,14 @@ export class P20  {
 
                 oo.delph=a[i].width;
                 oo.idUi=a[i].id;
+                if(a[i].alignmentId){
+                    oo.bChaz=false;
+                    if(a[i].alignmentOtherSide=="left") oo.bChaz=true;
+                    oo.sUi=a[i].alignmentId;
+                }
+                else {
+                    oo.sUi=-1
+                }
                 o.arrSplice.push(oo);
 
                 

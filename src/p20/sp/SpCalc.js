@@ -167,20 +167,20 @@ export function SpCalc () {
 					for (var i = 0; i < 6; i++) {
 						sHron.sten.arrPosit[i].set(arrP[5 - i].x, arrP[5 - i].y);
 					}
+					
 				} else {
 					for (var i = 0; i < 6; i++) {
 						sHron.sten.arrPosit[i].set(arrP[i].x, arrP[i].y);
 					}
+					
 				}
 			} else {
 				window.console.warn('непонял как считить  ', sHron.sten.tip);
-			}
-
-			if(sHron.sten.offset!=0){
-				sHron.sten.arrPosit[2].y=sHron.sten.arrPosit[3].y=0
-				sHron.sten.arrPosit1[2].y=sHron.sten.arrPosit1[3].y=0
-				//trace(sHron.sten.arrPosit, sHron.sten.arrPosit1)
-			}
+			}			
+		}
+		if(sHron.sten.offset!=0){
+			sHron.sten.arrPosit[2].y=sHron.sten.arrPosit[3].y=0
+			sHron.sten.arrPosit1[2].y=sHron.sten.arrPosit1[3].y=0
 		}
 
 	};
@@ -370,6 +370,7 @@ export function SpCalc () {
 		return null;
 	};
 
+	var ob	
 	this.getLineStan2 = function (sHron, sHron1, bool, offset, offset1) {
 		bXZva.delph = sHron.sten.delph + (offset || 0);
 		bXZva1.delph = sHron1.sten.delph + (offset1 || 0);
@@ -379,6 +380,10 @@ export function SpCalc () {
 
 		if (bXZva.delph / 2 + 1 > r)r = bXZva.delph + 1;
 		if (bXZva1.delph / 2 + 1 > r)r = bXZva1.delph + 1;
+
+
+		
+
 
 
 		b1 = 1;
@@ -397,8 +402,8 @@ export function SpCalc () {
 			}
 
 			calc.korektToLine(arrP[0], arrP[1], 0, -bXZva.delph / 2 * b1);
-
-			bXZva.restertTip(0, arrP[0], arrP[1], arrP[2 + 1], sHron.sten.offset,true);
+			
+			bXZva.restertTip(0, arrP[0], arrP[1], arrP[2 + 1], sHron.sten);
 
 			if(debug){
 				if(sHron.sten.offset!=0){
@@ -464,7 +469,7 @@ export function SpCalc () {
 				//debug.dLine(arrP[0 + 6],arrP[1 + 6],0x00ff00,22)
 			}
 
-			bXZva1.restertTip(0, arrP[0 + 6], arrP[1 + 6], arrP[1 + 2 + 6],sHron1.sten.offset,true);
+			bXZva1.restertTip(0, arrP[0 + 6], arrP[1 + 6], arrP[1 + 2 + 6], sHron1.sten);
 		} else if (sHron1.sten.tip == 1) {
 
 			if (bool == true) {
