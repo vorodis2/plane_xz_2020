@@ -1,17 +1,16 @@
 
 //import { TriangulateShape } from './TriangulateShape.js';
-import { SpliceSten } from './SpliceSten.js';
-import { SpPointSten } from './SpPointSten.js';
+
 import { SpDebugPixi } from './SpDebugPixi.js';
 
-import {  Calc } from './../Calc.js';
+
 
 import {  SPLine } from './SPLine.js';
-/**
-* Мир для сращалок дорог
-* @class
-* @extends SpStage
-*/
+
+
+
+
+
 
 
 export class SPLineWord  {

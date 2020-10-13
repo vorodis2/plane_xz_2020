@@ -1,11 +1,5 @@
 
-//import { TriangulateShape } from './TriangulateShape.js';
 
-/**
-* Мир для сращалок дорог
-* @class
-* @extends SpStage
-*/
 
 
 export class SPLine  {
@@ -21,6 +15,7 @@ export class SPLine  {
         this.colol=0x3e575e
         this.colol_="#3e575e"
         this.array=[];
+        trace("@@@@@@@@")
 
         this.content2d = new PIXI.Container();
         par.content2d.addChild(this.content2d);
