@@ -1,6 +1,7 @@
 
 import { SpStageSten } from './spSten/SpStageSten.js';
 import { DebbugPixi } from './DebbugPixi.js';
+import { PGrid } from './plus/PGrid.js';
 
 export class P20  {
     constructor(fun) {
@@ -24,18 +25,46 @@ export class P20  {
         this.div.appendChild(this.deb.div);
 
 
-
+        this.sp=new SpStageSten(this);
         this.content2d = new PIXI.Container();
-        this.c2dNiz = new PIXI.Container();
+
+/*
+        this.graphics = new PIXI.Graphics();
+        this.content2d.addChild(this.graphics);
+    
+
+        this.graphics.beginFill(Math.random()*0xffffff, 0.91);
+        this.graphics.drawRect(0,0,200,200);*/
+
+       this.c2dNiz = new PIXI.Container();
         this.cont2d = new PIXI.Container();
+
+        this.grid=new PGrid(this.content2d,1000,10,10)
+
+
         this.cont2d.addChild(this.c2dNiz);
         this.cont2d.addChild(this.content2d);
-
         this.deb.content2d.addChild(this.cont2d);
 
 
 
-        /*this.graphics = new PIXI.Graphics();
+   
+
+        this.rectXX1 = {x:0,x1:0,y:0,y1:0,s:1,xs:0,ys:0}
+
+
+
+
+        this.content2d.addChild(this.sp.content2d1);
+        this.content2d.addChild(this.sp.content2d);
+        this.content2d.addChild(this.sp.content2dPoint);
+
+        this.content2d.addChild(this.sp.cont2dLine);
+
+        this.content2d.addChild(this.sp.cont2dDebug);
+/* */
+
+     /*this.graphics = new PIXI.Graphics();
         this.content2d.addChild(this.graphics);
     
 
@@ -43,14 +72,14 @@ export class P20  {
         this.graphics.drawRect(-1000,-1000,2000,2000);
         this.content2d.scale.x=this.content2d.scale.y=0.1;*/
 
-        this.rectXX1={x:0,x1:0,y:0,y1:0,s:1,xs:0,ys:0}
 
-        this.sp=new SpStageSten(this);
-        this.content2d.addChild(this.sp.content2d1);
-        this.content2d.addChild(this.sp.content2d);
-        this.content2d.addChild(this.sp.content2dPoint);
+/*
+        var spinningText = new PIXI.Text('Im fudgfsdsgfdsgfdsgdsgasgfsdgfdsgfn!', { font: 'bold 6px Arial', fill: '#cc00ff', align: 'center', stroke: '#FFFFFF', strokeThickness: 66 });
 
-        this.content2d.addChild(this.sp.cont2dDebug);
+        this.content2d.addChild(spinningText); 
+        trace("spinningText",spinningText)  */ 
+
+
 
         this.setArrObj=function(a){
             this.sp.clear();
@@ -79,6 +108,9 @@ export class P20  {
                 if(a[i].alignmentId){
                     oo.bChaz=false;
                     if(a[i].alignmentOtherSide=="left") oo.bChaz=true;
+                    oo.bChaz1=false;
+                    if(a[i].alignmentThisSide=="left") oo.bChaz1=true;
+
                     oo.sUi=a[i].alignmentId;
                 }
                 else {

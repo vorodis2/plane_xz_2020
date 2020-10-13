@@ -1,0 +1,109 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<title>plan2020</title>
+
+
+
+
+<script src='src/lib/jquery-1.11.3.js'></script>
+<!--
+
+<script src='src/libMy/MenuScene.js'></script>
+<script src='src/libMy/SceneSB.js'></script>
+
+<script src='src/lib/tween.min.js'></script>
+<script src='src/lib/three.min.js'></script>
+	дабаг-->	
+
+<script src='src/lib/pixi.min.js'></script>
+
+
+<script src='src/libMy/divLib.js'></script><!--дабаг-->
+
+
+
+
+
+
+
+<style type="text/css">
+	#stats { position: absolute; top:0; left: 200px; }
+</style>
+
+</head>
+<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<body>
+
+<script  type="module">
+
+	import { DebbugPixi } from './src/p20/DebbugPixi.js';
+
+	window.trace = window.console.log.bind(window.console);
+
+		
+
+
+
+		var stagePixi=new DebbugPixi()
+		trace(stagePixi)
+		document.body.appendChild(stagePixi.div);
+
+	
+
+		var texture = PIXI.Texture.from('resources/image/fill.png')//PIXI.utils.TextureCache['resources/image/fill.png'];
+
+
+
+       var sprit = new PIXI.extras.TilingSprite(texture, 2000, 2000);
+       sprit.anchor.set(0.5, 0.5);
+       stagePixi.content2d.addChild(sprit);
+
+       function scaleGrid(v) {
+            // приведение размера к масштабу от размера текущей текстуры
+            v = v > 100 ? v : 100;
+            var _scaleGrid = v;
+            var scx = _scaleGrid / sprit.texture.width;
+            scx=0.1
+            sprit.tileScale.set(scx, scx);
+            sprit.tilePosition.set(v * 0.5, v * 0.5);
+        };
+        scaleGrid(100);
+
+		sprit.position.x=333
+       sprit.position.y=333
+
+
+
+		var graphics = new PIXI.Graphics();
+	    stagePixi.content2d.addChild(graphics);
+	    //graphics.interactive = true;
+	    
+
+	    graphics.beginFill(0xff0000, 0.3);    
+	    graphics.drawCircle(0,0,150);
+
+
+
+
+
+	    var label = new PIXI.Text("sdfsfsdfsdfsdfsdfsfdsf", {});
+	    stagePixi.content2d.addChild(label);
+
+
+
+
+	
+	
+	    function animate() {
+            requestAnimationFrame( animate );
+            stagePixi.tick()
+
+        }
+
+
+
+	
+
+	
+</script>	
+</body></html>

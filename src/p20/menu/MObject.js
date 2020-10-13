@@ -3,10 +3,8 @@
 
 import { MOPoint } from './MOPoint.js';
 import { MOSten } from './MOSten.js';
-//import { MOBlok } from './MOBlok.js';
-//import { MOPol } from './MOPol.js';
-//import { MOPodloshka } from './MOPodloshka.js';
-//import { MOHome} from './MOHome.js';
+import { MOSp } from './MOSp.js';
+import { MOLine } from './MOLine.js';
 
 
 export class MObject  {
@@ -23,7 +21,7 @@ export class MObject  {
         this.whSize=1000
 
         this.dCont=new DCont(par.dCont);
-        this.dCont.y=this.wh+this.otstup1*2
+        this.dCont.y=this.wh+this.otstup1*2;
         
 
 
@@ -31,18 +29,13 @@ export class MObject  {
         this.array=[];
 
 
-        this.dragPic=this.par.dragPic//new DragPic(par.dCont)
+        this.dragPic=this.par.dragPic;
 
 
         this.array[0]=this.moPoint=new MOPoint(this, function(s,p){});
         this.array[1]=this.moSten=new MOSten(this, function(s,p){});
-        //this.array[2]=this.moBlok=new MOBlok(this, function(s,p){});
-        //this.array[3]=this.moPodloshka=new MOPodloshka(this, function(s,p){});
-        //this.array[4]=this.moPol=new MOPol(this, function(s,p){});
-        //this.array[5]=this.moHome=new MOHome(this, function(s,p){});
-        
-
-
+        this.array[2]=this.moSp=new MOSp(this, function(s,p){});
+        this.array[3]=this.moLine=new MOLine(this, function(s,p){});
 
 
         this.clear=function(){
@@ -52,9 +45,9 @@ export class MObject  {
         }
 
         this.setObject=function(obj){
+            trace(obj)            
             this.clear();
-            if(obj){
-                
+            if(obj){                
                 for (var i = 0; i < this.array.length; i++) {
                     if(this.array[i].typeNa==obj.type){                        
                         this.array[i].setObject(obj)
@@ -62,8 +55,6 @@ export class MObject  {
                     }
                 }
             }
-
-
         }
 
 

@@ -16,7 +16,7 @@ export class Menu  {
 		this.otstup1=10;
 		window.dcmParam = new DCM();
 		dcmParam.activButton="#f28044";
-		this._menuIndex=0;
+		this._menuIndex=-1;
 	    this.dCont=new DCont(document.body);	
 
 
@@ -43,7 +43,10 @@ export class Menu  {
            // self.fun(s,p)
         });
 
-		this.setP20=function(p20){this.mDragScane.setP20(p20)}
+		this.setP20=function(p20){
+			this.p20=p20
+			this.mDragScane.setP20(p20)
+		}
 
 
 	    this.object;
@@ -88,32 +91,7 @@ export class Menu  {
         	this.mDragScane.redrag();
         }
 
-      /*  var honeyTest;
-        this.test2 = function(obj,scan){
-        	var wind=new DWindow(this.dCont, 800, 0,"тест второй сцены и событий");
-    		wind.width=300;
-    		wind.height=300;
-    		wind.x=document.documentElement.clientWidth-wind.width
-    		//this.w.dragBool=false;
-    		//this.w.hasMinimizeButton=false;
-    		var textArae=new DTextArea(wind.content,2,wind.height-104,"",function(){
 
-    		})
-    		textArae.width=wind.width-4
-    		textArae.height=100
-
-    		honeyTest=new Honeycomb('resources/font/helvetiker_bold.typeface.json',function(s,p,p1){    			
-    			if(s=="complit"){   				
-					honeyTest.setObj(obj);
-					honeyTest.sizeWindow(wind.width, wind.height-104);
-    			}
-    			textArae.text=s+" "+p+"\n"+textArae.text;
-    		},
-    		'{"ambient":{"works":true,"active":true,"color":"#48f813","intensity":0.79},"shadow":{"works":true,"active":true,"mapSize":4096,"color":"#f62c73","bias":0.001,"intensity":0.22,"radius":1,"bAlphaForCoating":false,"fixation":false,"rotationX":0,"rotationZ":0,"distance":0,"cubWidth":500,"cubHeight":500,"distanceUpdateShadow":65.41},"sky":{"works":true,"active":true,"color":"#080808","link":"null","rotZ":0,"radius":1000,"x":204,"y":0,"z":0},"mirror":{"works":true,"link":"null","exposure":-1,"gamma":-1},"visi3D":{"works":true,"alwaysRender":false,"fov":45,"far":45000,"minZum":0,"maxZum":20000,"zume":250,"minRotationX":2.5,"maxRotationX":0,"debug":false,"isDragPan":true,"rotationX":0,"rotationZ":0}}'
-    		);
-    		
-    		wind.content.div.appendChild(honeyTest.div); //приатачиваем див там 3д и соты
-        }*/
 
         this.upDate=function(){
         	if(honeyTest){
@@ -128,6 +106,7 @@ export class Menu  {
 	    		if(array[i].sizeWindow)array[i].sizeWindow(w,h,s);
 	    	}
 	    }
+	    this.menuIndex=0;
 	}
 
 	set menuIndex(value) {		
@@ -149,10 +128,12 @@ export class MStart  {
 		this.idArr=idArr
 
 		this.dCont=new DCont(par.dCont);	
+		
 
 		this.w=new DPanel(this.dCont, 2, 2);
     	this.w.height=par.wh+2*this.par.otstup;
 
+		this.dCont1=new DCont(this.w);
     	self.input=undefined;
     	//SceneSB
     	this.menuScene=undefined;
@@ -168,9 +149,25 @@ export class MStart  {
  
 
 
+    	this.init1=function(){
+    		var w=0
+    		var b = new DButton(this.dCont1, w, 2, "M",function(){		       
+    			self.par.mObject.setObject(self.par.p20.sp)
+		    })
+		    b.width=b.height=par.wh-2;
+		    w+=par.wh+2
+    		this.dCont1.width=w;
+
+    	}
+		this.init1()
+
+
+
+
+
     	
 
-  	
+  		
     	this.init=function(){
 		    var b = new DButton(this.w, 204, 2, "set",function(){
 		        let o=JSON.parse(self.textArea.value);
@@ -205,9 +202,13 @@ export class MStart  {
 		    this.textArea.fontSize=8;
 		    this.textArea.height=par.wh-2;
 
+		    
+		    if(this.startObj!=undefined){
+		    	trace(this.startObj)
+		    }
+
 		    setTimeout(function() {
-	    		if(self.par.localStorage.object.model){
-	    			//let o=JSON.parse(self.textArea.value);
+	    		if(self.par.localStorage.object.model){	    			
 		        	self.par.fun("setObj",self.par.localStorage.object.model);
 		        	self.par.mDragScane.redrag();
 	    		}
@@ -220,7 +221,7 @@ export class MStart  {
 
 		
     	this.setObj=function(o){
-	    	if(self.input==undefined)return   	
+	    	if(self.textArea==undefined)return   	
 	    	let s=JSON.stringify(o);
 	    	
 	    	if(self.check.value==true){
@@ -230,8 +231,11 @@ export class MStart  {
             
         }
 
+        this.startObj=undefined
 	    this.setArrObj=function(o){
-         	if(self.input==undefined)return  
+	    	this.startObj=o;
+	    	trace("@@@@@@@@@@@@@@@@@@@@@@@@@@",o)
+         	if(self.textArea==undefined)return;  
         	let s=JSON.stringify(o);
         	self.textArea.value=s;
         	
@@ -240,7 +244,7 @@ export class MStart  {
 
 
 	    this.setObject=function(object){
-	    	if(self.input==undefined)return
+	    	if(self.textArea==undefined)return
 	    	this.object=self.par.fun("returnScane");
 	    	self.input.value=self.object.startVisi;	    	
 	    	if(self.input.value == "null"){
@@ -255,6 +259,9 @@ export class MStart  {
 
     	this.sizeWindow=function(w,h,s){
     		this.w.width=w-par.otstup*2;
+    		
+    		this.dCont1.x =this.w.width-this.dCont1.width
+    		
     	}
 
 

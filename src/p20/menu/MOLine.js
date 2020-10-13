@@ -2,11 +2,11 @@
 
 import { MOBaza } from './MOBaza.js';
 
-export class MOSten extends MOBaza {
+export class MOLine extends MOBaza {
   	constructor(par,fun) {  
         super(par,fun);
-  		this.type="MOSten";
-        this.typeNa="SpliceSten";
+  		this.type="MOLine";
+        this.typeNa="SPLine";
   		var self=this;
 
         
@@ -18,7 +18,7 @@ export class MOSten extends MOBaza {
         this.slid1
         this.postIn=function(){
            
-            this.window.title="Sten";
+            this.window.title="SPLine";
 
             var yy=this.otstup1;
 
@@ -28,137 +28,32 @@ export class MOSten extends MOBaza {
             },"resources/image/p0.png");
             this.button.width=this.button.height=this.wh;
 
-            this.button1=new DButton(this.window.content,this.otstup1*2+this.wh,yy,"",function(){
-                if(this.alpha==1){
-                    self.object.stage.boolText=self.object.boolText=true; 
-                    this.alpha=0.5
-                    return
-                }else{
-                    self.object.stage.boolText=self.object.boolText=false; 
-                    this.alpha=1
-                    return
-                }                
-            },"resources/image/w6.png");
-            this.button1.width=this.button1.height=this.wh;
+
 
             yy+=(this.otstup1+this.wh)
 
             this.slid=new DSliderBig(this.window.content, this.otstup1,yy, function(s){ 
-                self.object.delph=self.slid.value 
-                self.object._addPoint.dragGG(); 
-                self.object._addPoint1.dragGG();
-            }, "delph",  5, 1000);
+                self.object.otstup=self.slid.value         
+            }, "otstup",  -2000, 2000);
             this.slid.width=this.width-this.otstup1*2;
             this.slid.okrug=1;
 
-            yy+=(this.otstup1+this.wh)
-
-            new DLabel(this.window.content, 2,yy,"bChaz").fontSize=10
-            new DLabel(this.window.content, 42,yy,"bChaz1").fontSize=10
-            new DLabel(this.window.content, 92,yy,"idUi").fontSize=10
-            new DLabel(this.window.content, 158,yy,"sUi").fontSize=10
 
 
-            yy+=12
-            this.input=new DInput(this.window.content, 92,yy,"" ,function(s){ 
-                self.object.idUi=this.value*1
-            })
-            this.input.width=60;  
+            yy+=50
+ 
 
-            this.input1=new DInput(this.window.content, 158,yy,"" ,function(s){ 
-                self.object.sUi=this.value*1
-                self.object._addPoint.dragVokrug(); 
-                self.object._addPoint1.dragVokrug(); 
-            })
-            this.input1.width=60; 
-
-
-            this.chek=new DCheckBox(this.window.content, 2,yy+5," " ,function(s){ 
-                self.object.bChaz=this.value*1;
-                self.object._addPoint.dragVokrug(); 
-                self.object._addPoint1.dragVokrug(); 
-            })
-            this.chek1=new DCheckBox(this.window.content, 42,yy+5," " ,function(s){ 
-                self.object.bChaz1=this.value*1;
-                self.object._addPoint.dragVokrug(); 
-                self.object._addPoint1.dragVokrug(); 
-            }) 
-            yy+=36;
-         
-
-
-            this.slid1=new DSliderBig(this.window.content, this.otstup1,yy, function(s){ 
-                self.object.offset=self.slid1.value;  
-                self.object._addPoint.dragVokrug(); 
-                self.object._addPoint1.dragVokrug();              
-                            
-            }, "offset", -1000, 1000);
-            this.slid1.width=this.width-this.otstup1*2;
-            this.slid1.okrug=1;           
-
-            this.window.height=this.slid1.y+50+32;
+            this.window.height=yy+32;
 
 
 
 
 
-/*
-            
-            
-             this.gallery=new DGSten(this.window.content,this.otstup1,120+(this.otstup1+this.wh),function(s,p){
-                
-                if(s=="index"){
-                    self.object.col3d=this.obj.id
-                    self.object.stage.col3d=this.obj.id
-                    return
-                }
-                if(s=="index1"){
-                    self.object.col3d1=this.obj.id
-                    self.object.stage.col3d1=this.obj.id
-                    return
-                }
-                if(s=="indexBig"){
-                    self.object.col3d=this.obj.id
-                    self.object.col3d1=this.obj.id
-
-                    self.object.stage.col3d=this.obj.id
-                    self.object.stage.col3d1=this.obj.id
-                    return
-                }
-            },this) 
-            this.gallery.kolII=3;
-            this.gallery.widthPic=64;
-            this.gallery.heightPic=64;
-            this.gallery.width=66*this.gallery.kolII+2;
-
-
-           for (var i = 0; i < this.arrayGal.length; i++) {
-                this.arrayGal[i].typeThree="Sten3D"
-                this.arrayGal[i].title=""
-                this.arrayGal[i].src="resources/data/"+this.arrayGal[i].id+"/128.png"
-            }
-            this.gallery.start(this.arrayGal);
-            this.gallery.height=Math.ceil(this.arrayGal.length/this.gallery.kolII)*66+2
-            this.window.height=this.gallery.height+this.gallery.y+this.otstup1+32;*/
         }        
         
         this.drag=function(){
-            self.slid.value=self.object.delph; 
-            self.input.value=self.object.idUi; 
-            self.input1.value=self.object.sUi; 
-            self.slid1.value=self.object._offset;
-            self.chek.value=self.object.bChaz; 
-            self.chek1.value=self.object.bChaz1; 
-            trace("self.object._bChaz",self.object._bChaz)
-            //self.slid1.value=self.object.height;           
-           /* for (var i = 0; i < self.arrayGal.length; i++) {
-                if(self.arrayGal[i].id==self.object.col3d)self.gallery.index=i;
-                if(self.arrayGal[i].id==self.object.col3d1)self.gallery.index1=i;
-            }*/
+            self.slid.value=self.object.otstup; 
 
-            
-            if(!self.object.boolText)self.button1.alpha=1;
-            else self.button1.alpha=0.5;
         }
 
 
@@ -166,8 +61,8 @@ export class MOSten extends MOBaza {
        
 
         this.postSO=function(){ 
-            this.object.funDragMenu=this.drag
-            this.window.title="Sten "+this.object.idArr+" : "+ this.object.idUi;
+            this.object.funDragMenu=this.drag;
+            this.window.title="SPLine "+this.object.idArr;
             this.drag();
         }
         this.clear=function(){

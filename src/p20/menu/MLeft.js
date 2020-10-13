@@ -37,7 +37,8 @@ export class MLeft  {
 
         var aa=[
             {src:"resources/image/p1_100.png",array:[]},
-            {src:"resources/image/p2_100.png",array:[{src:"resources/image/p3_100.png",array:[]}]}
+            {src:"resources/image/p2_100.png",array:[]},
+            {src:"resources/image/size.png",array:[]}
         ]
 
         this.objZ={}
@@ -64,7 +65,7 @@ export class MLeft  {
             for (var i = 0; i < this.objThree.array.length; i++) {
                 this.array[i]= new MLButGal(this,this.drag,i,this.objThree.array[i])
             }
-            this.index=0;
+            
         }
 
         this.drag=function(s,p){
@@ -95,7 +96,7 @@ export class MLeft  {
     set index(value) {
         if(this._index!=value){
             this._index= value;
-         
+            
             for (var i = 0; i < this.array.length; i++) {
                 if(i==this._index){                    
                     this.array[i].active=true;

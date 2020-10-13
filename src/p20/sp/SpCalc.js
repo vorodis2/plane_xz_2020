@@ -219,6 +219,7 @@ export function SpCalc () {
 		sHron1.sten.arrPosit1[3].y=0;*/
 
 		if (kol == 1) {//финал стены
+			sHron1.sten.korectOffset()
 			if (sHron1.sten.tip == 0) {
 				
 				if(debug){
@@ -279,6 +280,10 @@ export function SpCalc () {
 			sHron = aP.arrSHron[num];// основная
 			sHron1 = aP.arrSHron[num1];// основная
 			sHron2 = aP.arrSHron[num2];// основная
+
+			sHron.sten.korectOffset()
+			sHron1.sten.korectOffset()
+			sHron2.sten.korectOffset()
 
 			var nB = false;
 			if (kol > 2) {

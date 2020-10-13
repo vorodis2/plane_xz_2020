@@ -21,23 +21,22 @@ export class SpDebugPixi  {
 			this.graphics = new PIXI.Graphics();
 			this.contentDebag.addChild(this.graphics);
 			if (color == undefined)color = 0xFF0000;
-			if (wL == undefined)wL = 1;
+			if (wL == undefined)wL = 10;
 			this.graphics.lineStyle(wL, color, wL);
 			this.graphics.moveTo(p.x, p.y);
 			this.graphics.lineTo(p1.x, p1.y);
 		};
 
 
-		this.debagPoint = function (p, r, color, wL) {
-			//if (this.debagOk(aP) == false) return;
-			trace(p, r, color, wL)
+		this.debagPoint = function (p, r, color, wL, a) {		
 			this.graphics = new PIXI.Graphics();
 			this.contentDebag.addChild(this.graphics);
 			r = r || 50;
 			if (color == undefined)color = 0xFF0000;
 			wL = wL || 10;
+
 			this.graphics.lineStyle(10, color, wL);
-			this.graphics.beginFill(color);
+			this.graphics.beginFill(color, a==undefined ? 1: a);
 			this.graphics.drawCircle(p.x, p.y, r);
 		};
 
