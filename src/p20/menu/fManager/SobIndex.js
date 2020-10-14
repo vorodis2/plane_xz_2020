@@ -315,28 +315,9 @@ export class SobIndex  {
 
 
 
-        var sp={x:0,y:0,x1:0,y1:0,s:0,o:null}
-
-        this.cont
-        this.p20
-        function mMove(e){ 
-            self.cont.x=sp.x+(e.clientX-sp.x1);
-            self.cont.y=sp.y+(e.clientY-sp.y1);             
-        }
-
-        function mUp(e){           
-            document.removeEventListener("mouseup", mUp);
-            document.removeEventListener("mousemove", mMove); 
-        }
 
         this.downFont=function(e){
-            sp.x1=e.data.originalEvent.clientX//+self.cont.x;
-            sp.y1=e.data.originalEvent.clientY; 
-            sp.x=self.cont.x;
-            sp.y=self.cont.y;
-            sp.s= self.cont.scale.x;          
-            document.addEventListener("mouseup", mUp);
-            document.addEventListener("mousemove", mMove); 
+            self.par.par.mGridDrag.downFont(e);
         }
 
         this.setP20=function(p20){

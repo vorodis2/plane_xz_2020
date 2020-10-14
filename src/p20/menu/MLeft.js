@@ -20,8 +20,8 @@ export class MLeft  {
         this._tipVisi=-1;
         this._tipDrav=-1;
         this.dCont=new DCont(par.dCont);
-        this.dCont.x=this.otstup;
-        this.dCont.y=this.otstup*4+this.wh;
+        this.dCont.x=this.otstup*2;
+        this.dCont.y=this.otstup*5+this.wh;
 
         this.objectBase=undefined;
         this.objThree=undefined;
@@ -30,10 +30,10 @@ export class MLeft  {
         this.array=[];
 
         //new DPanel(this.dCont,0,0)
-        setTimeout(function() {
+        /*setTimeout(function() {
             self.dCont.visible=true
             trace(self.dCont)
-        }, 10);
+        }, 10);*/
 
         var aa=[
             {src:"resources/image/p1_100.png",array:[]},
@@ -112,7 +112,7 @@ export class MLeft  {
     set tipVisi(value) {
         if(this._tipVisi!=value){
             this._tipVisi= value;
-            this.array[0].startIndex=value;       
+            //this.array[0].startIndex=value;       
         }
     }    
     get tipVisi() { return  this._tipVisi;}
@@ -120,7 +120,7 @@ export class MLeft  {
     set tipDrav(value) {
         if(this._tipDrav!=value){
             this._tipDrav= value;
-            this.array[1].startIndex=value;  
+            //this.array[1].startIndex=value;  
         }
     }    
     get tipDrav() { return  this._tipDrav;}

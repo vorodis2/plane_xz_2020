@@ -2,10 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 
  let conf = {
-  	entry: './src/p20/menu/index.js',
+  	entry: './src/index.js',
   	output: {
     	path: path.resolve(__dirname, 'build'),
-		filename: 'p20Menu.js',
+		filename: 'p20.min.js',
 		publicPath: 'build/'
   	},
   	devServer: {

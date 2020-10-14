@@ -44,6 +44,9 @@ export class SpDebugPixi  {
 		this.clearD = function () {
 			g.clear();
 		};
+		this.clear = function () {
+			g.clear();
+		};
 
 		this.dLine = function (p, p1, color, wL) {
 			//if (this.debagOk(aP) == false) return;
@@ -84,6 +87,29 @@ export class SpDebugPixi  {
 			g.drawCircle(p.p1.x, p.p1.y, rr);
 			g.drawCircle(p.p2.x, p.p2.y, rr);
 			g.endFill();
+		};
+
+		this.dRect = function (r, color, wL) {
+			//if (this.debagOk(aP) == false) return;
+			r = r || 50;
+			if (r > 1000000) {
+				console.warn('Большой круг рисовать не буду', r);
+				return;
+			}
+			if (color == undefined)color = 0xFF0000;
+			wL = wL || 10;
+			let ww=r.w  ==undefined ? r.width : r.w
+			let hh=r.h  ==undefined ? r.height : r.h
+
+			let p={x:r.x,y:r.y};
+			let p1={x:r.x+ww,y:r.y};
+			let p2={x:r.x+ww,y:r.y+hh};
+			let p3={x:r.x,y:r.y+hh};
+			this.dLine(p,p1, color, wL)
+			this.dLine(p1,p2, color, wL)
+			this.dLine(p2,p3, color, wL)
+			this.dLine(p3,p, color, wL)
+		
 		};
 
     }

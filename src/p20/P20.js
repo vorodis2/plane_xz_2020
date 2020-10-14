@@ -1,18 +1,19 @@
 
 import { SpStageSten } from './spSten/SpStageSten.js';
-import { DebbugPixi } from './DebbugPixi.js';
-import { PGrid } from './plus/PGrid.js';
+
+
 
 export class P20  {
-    constructor(fun) {
+    constructor(par,fun) {
     	this.type="P20";
     	var self=this;
-
+        this.par=par;
+        this.fun=fun;
 
         this.sobSP=undefined;
 
 
-        this.fun=fun;
+        
         this._activObject=undefined;
         this.div= document.createElement('div');
         this.div.style.position = 'fixed';
@@ -21,30 +22,28 @@ export class P20  {
 
 
 
-        this.deb=new DebbugPixi(); 
-        this.div.appendChild(this.deb.div);
+
+       // this.deb=new DebbugPixi(); 
+       // this.div.appendChild(this.deb.div);
+
 
 
         this.sp=new SpStageSten(this);
         this.content2d = new PIXI.Container();
 
-/*
-        this.graphics = new PIXI.Graphics();
-        this.content2d.addChild(this.graphics);
-    
 
-        this.graphics.beginFill(Math.random()*0xffffff, 0.91);
-        this.graphics.drawRect(0,0,200,200);*/
 
-       this.c2dNiz = new PIXI.Container();
+        this.c2dNiz = new PIXI.Container();
         this.cont2d = new PIXI.Container();
 
-        this.grid=new PGrid(this.content2d,1000,10,10)
+        
 
 
         this.cont2d.addChild(this.c2dNiz);
         this.cont2d.addChild(this.content2d);
-        this.deb.content2d.addChild(this.cont2d);
+        
+
+        //this.deb.content2d.addChild(this.cont2d);
 
 
 
@@ -58,9 +57,7 @@ export class P20  {
         this.content2d.addChild(this.sp.content2d1);
         this.content2d.addChild(this.sp.content2d);
         this.content2d.addChild(this.sp.content2dPoint);
-
         this.content2d.addChild(this.sp.cont2dLine);
-
         this.content2d.addChild(this.sp.cont2dDebug);
 /* */
 
@@ -195,8 +192,8 @@ export class P20  {
 
 
         this.sizeWindow=function(w,h,s){
-            this.deb.width=w;
-            this.deb.height=h;   
+           /* this.deb.width=w;
+            this.deb.height=h;  */ 
             
         }
 
@@ -218,7 +215,7 @@ export class P20  {
             this.deb.tick()
         }    
 
-        function animate() {
+       /* function animate() {
             requestAnimationFrame( animate );
             if(self.sp.doRender()==true){
                
@@ -232,7 +229,7 @@ export class P20  {
             }   
               self.render()       
         }
-        animate();
+        animate();*/
         
 
         this.fun("complit")

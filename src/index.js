@@ -1,7 +1,7 @@
-import { P20 } from './p20/P20.js';
+import { Main } from './Main.js';
 
 
-global.P20 = P20;
+global.Main = Main;
 
 
-export {P20};
+export {Main};

@@ -1,32 +1,35 @@
 
 
 export class PGrid  {
-    constructor(cont,wh,kolI,kolJ) {
+    constructor(cont,wh,rwh) {
     	this.type="PGrid";
     	
         var self = this;
         this.texture = PIXI.Texture.from('resources/image/fill.png');
-        this._scaleGrid = this.texture ? this.texture.baseTexture.width : 100;
+        //this._scaleGrid = this.texture ? this.texture.baseTexture.width : 100;
 
-        var scale = 100 / 256;
+        //var scale = 100 / 256;
 
-        this.wh = 40000;
+        this.wh = wh;
+        trace(this.wh)
 
-        var sprit = new PIXI.extras.TilingSprite(this.texture, this.wh/* / scale */, this.wh/* / scale */);
-        sprit.anchor.set(0.5, 0.5);
+        var sprit = new PIXI.extras.TilingSprite(this.texture, this.wh, this.wh);
+        //sprit.anchor.set(0.5, 0.5);
         cont.addChild(sprit);
+        var scx = (100 / 256)  /(rwh/100);
+        sprit.tileScale.set(scx, scx);
 
-        //sprit.position.x=-this.wh/2
-        //sprit.position.y=-this.wh/2
-        this.scaleGrid = function (v) {
+        sprit.position.x=-this.wh/2
+        sprit.position.y=-this.wh/2
+       // this.scaleGrid = function () {
             // приведение размера к масштабу от размера текущей текстуры
-            v = v //> 100 ? v : 100;
-            this._scaleGrid = v;
-            var scx = this._scaleGrid / sprit.texture.width;
-            sprit.tileScale.set(scx, scx);
-            sprit.tilePosition.set(v * 0.5, v * 0.5);
-        };
-        this.scaleGrid(2);
+            //v = v //> 100 ? v : 100;
+            //this._scaleGrid = v;
+            //var scx = rwh / 256;
+            //sprit.tileScale.set(scx, scx);
+            //sprit.tilePosition.set(v * 0.5, v * 0.5);
+       /* };
+        this.scaleGrid();*/
 
        /* var self=this;
         //this.texture = PIXI.utils.TextureCache['resources/image/fill.png'];// PIXI.Texture.fromImage('resources/fill.png');

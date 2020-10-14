@@ -23,30 +23,31 @@ export class MDragScane  {
 
 
 
+
+
         this.actAI=undefined;
         this.sobIndex=[]
         this.sobIndex[0]=new SobIndex0(this);
         this.sobIndex[1]=new SobIndex1(this);
         this.sobIndex[2]=new SobIndex2(this);
-        //this.sobIndex[3]=new SobIndex3(this);
-
-
-
+ 
 
 
 
            
 
 
-        this.sobSP=function(s,p,e){             
-            if(self.actAI!=undefined){
+        this.sobSP=function(s,p,e){ 
+                      
+            if(self.actAI!=undefined){                  
                 self.actAI.sobSP(s,p,e)
             }   
         }
 
 
-
-
+       /* this.deb=new DebbugPixi(); 
+        this.div.appendChild(this.deb.div);
+        this.content2d = new PIXI.Container();*/
       
        
 
@@ -64,61 +65,32 @@ export class MDragScane  {
             this.p20=p20;
             this.p20.sobSP=this.sobSP;
 
+
+
             for (var i = 0; i < this.sobIndex.length; i++) {
                 this.sobIndex[i].setP20(p20)
             }
-                     
-            this.graphics = new PIXI.Graphics();
+                
+
+
+            /*this.graphics = new PIXI.Graphics();
             p20.c2dNiz.addChild(this.graphics);
             this.graphics.name="xz";
             var r=20000;
             this.graphics.beginFill(0xdcf1fa, 1.5);
             this.graphics.drawRect(-r,-r,r*2,r*2);
             this.graphics.interactive = true;            
-            this.graphics.on('mousedown', this.klikGoem)//this.onDragStart);
-
-
+            this.graphics.on('mousedown', this.klikGoem)*/
         }  
 
         this.redrag  = function(){  
             this.p20.creatRect()
             this.cont.x=this.p20.rectXX1.xs;
             this.cont.y=this.p20.rectXX1.ys;
-            this.scale(this.p20.rectXX1.s) /* */           
-        }
-
-        this.scale  = function(s){
-            this.cont.scale.x=this.cont.scale.y=s
-            
+            this.scale(this.p20.rectXX1.s)            
         }
 
 
-
-        var hhh, www;
-        this.mousewheel = function (e) {       
-            
-            var delta=-1;
-            var p=e.delta
-            if(e.wheelDelta==undefined){
-                p=e.wheelDelta
-            }
-            if(e.delta)if(e.delta<0)delta=1;
-            if(e.deltaY)if(e.deltaY<0)delta=1;
-            if(e.detail)if(e.detail<0)delta=1;
-
-            
-            if(e.wheelDelta!=undefined){
-                if(e.wheelDelta>0)delta=-1;
-                else delta=1;
-            }
-            var s=-delta*0.01+self.cont.scale.x
-            if(s<0.01)s=0.01
-            self.scale(s)           
-        }
-
-
-        document.addEventListener('mousewheel', this.mousewheel)
-        document.addEventListener("DOMMouseScroll", this.mousewheel);
 
   		this.sizeWindow = function(w,h,s){ 
             if(this.cont){
